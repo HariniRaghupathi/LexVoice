@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Admin Lawyer Management</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #071A1F;
+    color: #E8F1F2;
+}
+
+header {
+    background: #0B252A;
+    padding: 22px 35px;
+    border-bottom: 1px solid #31555B;
+}
+
+header h1 {
+    color: #D7B56D;
+}
+
+header p {
+    color: #9DB4B8;
+    margin-top: 5px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.panel {
+    background: #102F35;
+    border: 1px solid #31555B;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    color: #D7B56D;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    color: #B7CBCD;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    background: #071A1F;
+    color: white;
+    border: 1px solid #35585E;
+    border-radius: 7px;
+    outline: none;
+}
+
+input:focus, textarea:focus {
+    border-color: #D7B56D;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.primary {
+    background: #D7B56D;
+    color: #071A1F;
+}
+
+.secondary {
+    background: transparent;
+    color: #D7B56D;
+    border: 1px solid #D7B56D;
+}
+
+.danger {
+    background: #9D4141;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.message {
+    margin-top: 15px;
+    color: #D7B56D;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #31555B;
+}
+
+th {
+    color: #D7B56D;
+}
+
+td {
+    color: #B7CBCD;
+}
+
+td button {
+    margin: 3px;
+}
+
+.back {
+    display: inline-block;
+    color: #D7B56D;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+@media(max-width: 650px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚖ LexVoice</h1>
+    <p>Admin Senior Lawyer Management</p>
+</header>
+
+<div class="container">
+
+    <a href="/admin.html" class="back">← Back to Admin Dashboard</a>
+
+    <section class="panel">
+
+        <h2 id="formTitle">Add Senior Lawyer</h2>
+
+        <form id="lawyerForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Lawyer Name *</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="field">
+                    <label>Specialization *</label>
+                    <input type="text" id="specialization" required>
+                </div>
+
+                <div class="field">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div class="field">
+                    <label>Email Address *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="field full">
+                    <label>Office Address</label>
+                    <textarea id="address"></textarea>
+                </div>
+
+                <div class="field full">
+                    <label>Experience</label>
+                    <input type="text" id="experience"
+                           placeholder="Example: 15 years">
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="primary" id="saveButton">
+                    Add Senior Lawyer
+                </button>
+
+                <button type="button" class="secondary"
+                        id="cancelButton" style="display:none"
+                        onclick="resetForm()">
+                    Cancel Edit
+                </button>
+            </div>
+
+            <p class="message" id="formMessage"></p>
+
+        </form>
+
+    </section>
+
+    <section class="panel">
+
+        <h2>Existing Senior Lawyers</h2>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Experience</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="lawyerTable">
+                    <tr>
+                        <td colspan="7">Loading lawyers...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="message" id="tableMessage"></p>
+
+    </section>
+
+</div>
+
+<script>
+
+let editingLawyerId = null;
+let seniorLawyers = [];
+
+const form = document.getElementById("lawyerForm");
+
+async function apiRequest(url, options = {}) {
+
+    const response = await fetch(url, {
+        ...options,
+        credentials: "same-origin",
+        headers: {
+            ...(options.headers || {})
+        }
+    });
+
+    const data = await response.json();
+
+    if (response.status === 401) {
+        window.location.href = "/admin-login.html";
+        throw new Error("Please log in as administrator.");
+    }
+
+    if (!response.ok || !data.success) {
+        throw new Error(data.message || "Something went wrong.");
+    }
+
+    return data;
+}
+
+
+// LOAD LAWYERS
+
+async function loadLawyers() {
+
+    const table = document.getElementById("lawyerTable");
+
+    table.innerHTML = `
+        <tr><td colspan="7">Loading lawyers...</td></tr>
+    `;
+
+    try {
+
+        const data = await apiRequest("/api/admin/lawyers");
+
+        // Display all non-Junior lawyer records here.
+        // Junior lawyer records remain in their own management page.
+        seniorLawyers = data.lawyers.filter(lawyer =>
+            String(lawyer.lawyer_level || "").toLowerCase() !== "junior"
+        );
+
+        table.innerHTML = "";
+
+        if (seniorLawyers.length === 0) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="7">No senior lawyers added yet.</td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        seniorLawyers.forEach(lawyer => {
+
+            const row = document.createElement("tr");
+
+            const values = [
+                lawyer.id,
+                lawyer.name,
+                lawyer.specialization,
+                lawyer.phone,
+                lawyer.email,
+                lawyer.experience || "-"
+            ];
+
+            values.forEach(value => {
+
+                const cell = document.createElement("td");
+                cell.textContent = value || "-";
+                row.appendChild(cell);
+
+            });
+
+            const actionCell = document.createElement("td");
+
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.className = "secondary";
+            editButton.addEventListener("click", () => editLawyer(lawyer.id));
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "danger";
+            deleteButton.addEventListener("click", () => deleteLawyer(lawyer.id));
+
+            actionCell.appendChild(editButton);
+            actionCell.appendChild(deleteButton);
+
+            row.appendChild(actionCell);
+            table.appendChild(row);
+
+        });
+
+    } catch (error) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="7"></td>
+            </tr>
+        `;
+
+        table.querySelector("td").textContent = error.message;
+
+    }
+}
+
+
+// ADD OR UPDATE LAWYER
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const lawyer = {
+        name: document.getElementById("name").value.trim(),
+        specialization: document.getElementById("specialization").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        experience: document.getElementById("experience").value.trim(),
+        lawyer_level: "Senior"
+    };
+
+    const message = document.getElementById("formMessage");
+
+    try {
+
+        const url = editingLawyerId
+            ? "/api/admin/lawyers/" + editingLawyerId
+            : "/api/admin/lawyers";
+
+        const method = editingLawyerId ? "PUT" : "POST";
+
+        const data = await apiRequest(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(lawyer)
+        });
+
+        message.textContent = data.message;
+
+        resetForm();
+        await loadLawyers();
+
+    } catch (error) {
+
+        message.textContent = error.message;
+
+    }
+
+});
+
+
+// EDIT LAWYER
+
+function editLawyer(id) {
+
+    const lawyer = seniorLawyers.find(item => item.id === id);
+
+    if (!lawyer) return;
+
+    editingLawyerId = id;
+
+    document.getElementById("name").value = lawyer.name || "";
+    document.getElementById("specialization").value = lawyer.specialization || "";
+    document.getElementById("phone").value = lawyer.phone || "";
+    document.getElementById("email").value = lawyer.email || "";
+    document.getElementById("address").value = lawyer.address || "";
+    document.getElementById("experience").value = lawyer.experience || "";
+
+    document.getElementById("formTitle").textContent = "Edit Senior Lawyer";
+    document.getElementById("saveButton").textContent = "Update Lawyer";
+    document.getElementById("cancelButton").style.display = "inline-block";
+
+    document.getElementById("formMessage").textContent =
+        "Editing lawyer #" + id;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// DELETE LAWYER
+
+async function deleteLawyer(id) {
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this lawyer?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+
+        const data = await apiRequest(
+            "/api/admin/lawyers/" + id,
+            {
+                method: "DELETE"
+            }
+        );
+
+        document.getElementById("tableMessage").textContent =
+            data.message;
+
+        if (editingLawyerId === id) {
+            resetForm();
+        }
+
+        await loadLawyers();
+
+    } catch (error) {
+
+        alert(error.message);
+
+    }
+
+}
+
+
+// RESET FORM
+
+function resetForm() {
+
+    form.reset();
+
+    editingLawyerId = null;
+
+    document.getElementById("formTitle").textContent =
+        "Add Senior Lawyer";
+
+    document.getElementById("saveButton").textContent =
+        "Add Senior Lawyer";
+
+    document.getElementById("cancelButton").style.display =
+        "none";
+
+    document.getElementById("formMessage").textContent = "";
+
+}
+
+
+// INITIALIZE PAGE
+
+loadLawyers();
+
+</script>
+
+</body>
+</html>

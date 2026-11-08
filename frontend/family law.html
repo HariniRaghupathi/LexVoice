@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice - Family Law</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#071A1F;
+    color:#E8F1F2;
+}
+
+header{
+    background:#102F35;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #D7B56D;
+}
+
+.logo{
+    color:#D7B56D;
+    font-size:27px;
+    font-weight:bold;
+}
+
+nav a{
+    color:#E8F1F2;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+nav a:hover{
+    color:#D7B56D;
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px;
+    background:linear-gradient(135deg,#071A1F,#123B42);
+}
+
+.hero h1{
+    font-size:48px;
+    color:#D7B56D;
+}
+
+.hero p{
+    max-width:700px;
+    margin:15px auto;
+    color:#C8D8DA;
+}
+
+.container{
+    width:86%;
+    max-width:1100px;
+    margin:45px auto;
+}
+
+.search{
+    width:100%;
+    padding:15px;
+    background:#102F35;
+    border:1px solid #D7B56D;
+    color:white;
+    border-radius:8px;
+}
+
+.title{
+    color:#D7B56D;
+    margin:35px 0 20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#102F35;
+    padding:25px;
+    border-radius:12px;
+    border:1px solid #28545B;
+}
+
+.card:hover{
+    border-color:#D7B56D;
+    transform:translateY(-4px);
+}
+
+.card h3{
+    color:#D7B56D;
+    margin-bottom:10px;
+}
+
+.info{
+    margin-top:20px;
+    padding:25px;
+    background:#102F35;
+    border-left:4px solid #D7B56D;
+    border-radius:8px;
+}
+
+ul{
+    margin-left:25px;
+}
+
+footer{
+    margin-top:60px;
+    padding:25px;
+    text-align:center;
+    background:#102F35;
+    color:#AFC3C6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">⚖ LexVoice</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="laws.html">Laws</a>
+<a href="lawyers.html">Lawyers</a>
+<a href="complaint.html">Complaint</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Family Law</h1>
+<p>
+Learn about marriage, divorce, maintenance, child custody,
+adoption and other family-related legal matters.
+</p>
+</section>
+
+<div class="container">
+
+<input id="search" class="search"
+placeholder="Search Family Law topics..."
+onkeyup="searchTopics()">
+
+<h2 class="title">Overview</h2>
+
+<div class="info">
+<p>
+Family law covers legal relationships and disputes involving
+families and individuals. Different personal laws and applicable
+legislation may apply depending on the circumstances.
+</p>
+</div>
+
+<h2 class="title">Major Areas</h2>
+
+<div class="cards" id="topics">
+
+<div class="card">
+<h3>Marriage</h3>
+<p>Legal requirements and rights associated with marriage.</p>
+</div>
+
+<div class="card">
+<h3>Divorce</h3>
+<p>Legal processes relating to dissolution of marriage.</p>
+</div>
+
+<div class="card">
+<h3>Maintenance</h3>
+<p>Financial support that may be available under applicable law.</p>
+</div>
+
+<div class="card">
+<h3>Child Custody</h3>
+<p>Legal issues concerning care, custody and welfare of children.</p>
+</div>
+
+<div class="card">
+<h3>Adoption</h3>
+<p>Legal procedures and requirements relating to adoption.</p>
+</div>
+
+<div class="card">
+<h3>Inheritance</h3>
+<p>Legal rules concerning succession and inheritance of property.</p>
+</div>
+
+</div>
+
+<h2 class="title">Important Considerations</h2>
+
+<div class="info">
+<ul>
+<li>Marriage registration and documentation</li>
+<li>Rights and responsibilities of spouses</li>
+<li>Child welfare and custody considerations</li>
+<li>Maintenance and financial support</li>
+<li>Succession and inheritance</li>
+<li>Applicable personal and statutory laws</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+© 2026 LexVoice | Educational Legal Information Portal
+</footer>
+
+<script>
+function searchTopics(){
+    let value=document.getElementById("search").value.toLowerCase();
+
+    document.querySelectorAll("#topics .card").forEach(card=>{
+        card.style.display=
+        card.innerText.toLowerCase().includes(value)
+        ? "block":"none";
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Login</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 20%, #153C42, transparent 30%),
+        radial-gradient(circle at 85% 80%, #102F35, transparent 30%),
+        #071A1F;
+    color: #E8F1F2;
+    overflow-x: hidden;
+}
+
+header {
+    height: 78px;
+    background: #0B252A;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    border-bottom: 1px solid #D7B56D;
+    position: relative;
+    z-index: 5;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #D7B56D;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #D7B56D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #D7B56D;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #F0D99C;
+}
+
+.login-section {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    position: relative;
+}
+
+/* Golden legal background symbols */
+.justice-symbol {
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    color: #D7B56D;
+    opacity: 0.20;
+    pointer-events: none;
+}
+
+.symbol-left {
+    top: 55px;
+    left: 5%;
+}
+
+.symbol-right {
+    bottom: 35px;
+    right: 5%;
+    transform: scaleX(-1);
+}
+
+.login-container {
+    position: relative;
+    width: 430px;
+    max-width: 100%;
+    z-index: 2;
+}
+
+.login-card {
+    background: #0B252A;
+    border: 1px solid #D7B56D;
+    border-radius: 20px;
+    padding: 42px 40px;
+    box-shadow: 0 25px 70px rgba(0,0,0,.4);
+}
+
+.login-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 18px;
+    border: 1px solid #D7B56D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    color: #D7B56D;
+}
+
+.login-card h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #F0D99C;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #91AAAE;
+    font-size: 14px;
+    margin-bottom: 32px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #E8F1F2;
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 14px 45px 14px 15px;
+    background: #102F35;
+    color: #E8F1F2;
+    border: 1px solid #53645A;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-box input:focus {
+    border-color: #D7B56D;
+    box-shadow: 0 0 0 3px rgba(215,181,109,.10);
+}
+
+.input-box input::placeholder {
+    color: #829A9E;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #D7B56D;
+    font-size: 17px;
+    user-select: none;
+}
+
+.password-rule {
+    margin-top: 8px;
+    color: #829A9E;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.form-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -5px;
+    margin-bottom: 25px;
+}
+
+.forgot {
+    color: #D7B56D;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: #D7B56D;
+    color: #071A1F;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #E6C983;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(215,181,109,.18);
+}
+
+.login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 27px 0;
+    color: #829A9E;
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    height: 1px;
+    background: #53645A;
+    flex: 1;
+}
+
+.register-text {
+    text-align: center;
+    color: #829A9E;
+    font-size: 14px;
+}
+
+.register-text a {
+    color: #D7B56D;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+.error, .success {
+    display: none;
+    margin-bottom: 18px;
+    padding: 11px 13px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.error {
+    background: #351B20;
+    border: 1px solid #6E3A43;
+    color: #FF9DAE;
+}
+
+.success {
+    background: #16382B;
+    border: 1px solid #2E7455;
+    color: #7BE0A8;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #829A9E;
+    background: #06161A;
+    font-size: 13px;
+    border-top: 1px solid #24494F;
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 0 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .login-section {
+        padding: 45px 18px;
+    }
+
+    .login-card {
+        padding: 35px 25px;
+    }
+
+    .login-card h1 {
+        font-size: 28px;
+    }
+
+    .justice-symbol {
+        width: 95px;
+        height: 95px;
+        opacity: 0.13;
+    }
+
+    .symbol-left {
+        left: 1%;
+    }
+
+    .symbol-right {
+        right: 1%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">⚖</div>
+        LexVoice
+    </div>
+
+    <nav>
+        <a href="/login">Login</a>
+    </nav>
+</header>
+
+<section class="login-section">
+
+    <!-- Golden scales of justice: left -->
+    <svg class="justice-symbol symbol-left"
+         viewBox="0 0 200 200"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+
+        <path d="M100 25 V165"/>
+        <path d="M55 165 H145"/>
+        <path d="M75 175 H125"/>
+        <path d="M100 25 L90 40 H110 Z"/>
+        <path d="M45 65 H155"/>
+        <circle cx="100" cy="65" r="5"/>
+
+        <path d="M55 65 L35 115"/>
+        <path d="M55 65 L75 115"/>
+        <path d="M35 115 Q55 135 75 115"/>
+
+        <path d="M145 65 L125 115"/>
+        <path d="M145 65 L165 115"/>
+        <path d="M125 115 Q145 135 165 115"/>
+
+        <path d="M80 40 H120"/>
+        <path d="M90 25 H110"/>
+    </svg>
+
+    <!-- Golden scales of justice: right -->
+    <svg class="justice-symbol symbol-right"
+         viewBox="0 0 200 200"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+
+        <path d="M100 25 V165"/>
+        <path d="M55 165 H145"/>
+        <path d="M75 175 H125"/>
+        <path d="M100 25 L90 40 H110 Z"/>
+        <path d="M45 65 H155"/>
+        <circle cx="100" cy="65" r="5"/>
+
+        <path d="M55 65 L35 115"/>
+        <path d="M55 65 L75 115"/>
+        <path d="M35 115 Q55 135 75 115"/>
+
+        <path d="M145 65 L125 115"/>
+        <path d="M145 65 L165 115"/>
+        <path d="M125 115 Q145 135 165 115"/>
+
+        <path d="M80 40 H120"/>
+        <path d="M90 25 H110"/>
+    </svg>
+
+    <div class="login-container">
+        <div class="login-card">
+
+            <div class="login-icon">⚖</div>
+
+            <h1>Welcome Back</h1>
+
+            <p class="subtitle">
+                Login to continue to LexVoice
+            </p>
+
+            <div class="error" id="errorMessage" role="alert"></div>
+            <div class="success" id="successMessage" role="status"></div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-box">
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="input-box">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                        <span
+                            class="password-toggle"
+                            onclick="togglePassword()"
+                            id="eyeIcon"
+                            title="Show password">👁</span>
+                    </div>
+
+                    <div class="password-rule">
+                        Enter the password you used during registration.
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <a href="/forgot-password.html" class="forgot">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginButton">
+                    Login to LexVoice
+                </button>
+
+            </form>
+
+            <div class="divider">OR</div>
+
+            <div class="register-text">
+                Don't have a LexVoice account?
+                <a href="/register">Create Account</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 LexVoice | Multilingual Legal Information Platform
+</footer>
+
+<script>
+function togglePassword() {
+    const password = document.getElementById("password");
+    const eye = document.getElementById("eyeIcon");
+
+    if (password.type === "password") {
+        password.type = "text";
+        eye.textContent = "🙈";
+        eye.title = "Hide password";
+    } else {
+        password.type = "password";
+        eye.textContent = "👁";
+        eye.title = "Show password";
+    }
+}
+
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("errorMessage");
+    const success = document.getElementById("successMessage");
+    const button = document.getElementById("loginButton");
+
+    error.style.display = "none";
+    success.style.display = "none";
+
+    if (!email || !password) {
+        error.textContent = "Please enter your email and password.";
+        error.style.display = "block";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Logging in...";
+
+    try {
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin",
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            error.textContent = data.message || "Invalid email or password.";
+            error.style.display = "block";
+            return;
+        }
+
+        success.textContent = "Login successful! Opening LexVoice...";
+        success.style.display = "block";
+
+        window.location.href = data.redirect || "/index.html";
+
+    } catch (err) {
+        console.error("Login error:", err);
+        error.textContent = "Unable to connect to the server. Please check that Flask is running.";
+        error.style.display = "block";
+    } finally {
+        button.disabled = false;
+        button.textContent = "Login to LexVoice";
+    }
+});
+</script>
+
+</body>
+</html>

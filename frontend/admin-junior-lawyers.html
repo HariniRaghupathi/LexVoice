@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Junior Lawyers | LexVoice</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",Arial,sans-serif}
+body{background:#071A1F;color:white;min-height:100vh}
+header{background:#102F35;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid #35585E}
+.logo{color:#D7B56D;font-size:24px;font-weight:bold}
+header a{color:#D7B56D;text-decoration:none}
+.container{max-width:950px;margin:35px auto;padding:0 20px}
+h1{color:#D7B56D;margin-bottom:10px}
+.subtitle{color:#9DB4B8;margin-bottom:25px}
+.panel{background:#102F35;border:1px solid #35585E;border-radius:15px;padding:25px;margin-bottom:25px}
+h2{color:#D7B56D;margin-bottom:20px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+input,textarea{width:100%;padding:13px;background:#071A1F;color:white;border:1px solid #35585E;border-radius:8px;outline:none}
+input:focus,textarea:focus{border-color:#D7B56D}
+textarea{grid-column:1/-1;resize:vertical;min-height:75px}
+button{background:#D7B56D;color:#071A1F;border:0;border-radius:8px;padding:13px 20px;font-weight:bold;cursor:pointer}
+form button{grid-column:1/-1}
+button:hover{opacity:.9}
+#message{margin-top:15px;color:#D7B56D}
+.lawyer{padding:17px;border:1px solid #35585E;border-radius:10px;margin-top:12px}
+.lawyer h3{color:#D7B56D;margin-bottom:8px}
+.lawyer p{color:#C5D3D5;margin:5px 0;overflow-wrap:anywhere}
+.empty{color:#9DB4B8;padding:15px 0}
+@media(max-width:600px){form{grid-template-columns:1fr}textarea,form button{grid-column:1}}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="logo">LEXVOICE ADMIN</div>
+    <a href="/admin.html">← Back to Dashboard</a>
+</header>
+
+<main class="container">
+    <h1>Manage Junior Lawyers</h1>
+    <p class="subtitle">Add junior lawyer information to the LexVoice directory.</p>
+
+    <section class="panel">
+        <h2>Add a Junior Lawyer</h2>
+
+        <form id="lawyerForm">
+            <input name="name" placeholder="Lawyer name" required>
+            <input name="specialization" placeholder="Specialization" required>
+            <input name="phone" placeholder="Phone number" required>
+            <input name="email" type="email" placeholder="Email address" required>
+            <input name="address" placeholder="Office address">
+            <input name="experience" placeholder="Experience (e.g. 2 years)">
+            <button type="submit">Add Junior Lawyer</button>
+        </form>
+
+        <p id="message"></p>
+    </section>
+
+    <section class="panel">
+        <h2>Existing Junior Lawyers</h2>
+        <div id="lawyerList"><p class="empty">Loading lawyers...</p></div>
+    </section>
+</main>
+
+<script>
+const form = document.getElementById("lawyerForm");
+const message = document.getElementById("message");
+const lawyerList = document.getElementById("lawyerList");
+
+async function checkAdmin() {
+    try {
+        const response = await fetch("/api/admin/stats");
+        if (response.status === 401 || response.status === 403) {
+            window.location.href = "/admin-login.html";
+            return false;
+        }
+        if (!response.ok) throw new Error("Could not verify admin login.");
+        return true;
+    } catch (error) {
+        lawyerList.textContent = error.message;
+        return false;
+    }
+}
+
+async function loadLawyers() {
+    try {
+        const response = await fetch("/api/junior-lawyers");
+        const data = await response.json();
+
+        if (!response.ok || data.success === false) {
+            throw new Error(data.message || "Unable to load lawyers.");
+        }
+
+        const lawyers = Array.isArray(data) ? data : (data.lawyers || []);
+        lawyerList.replaceChildren();
+
+        if (lawyers.length === 0) {
+            lawyerList.innerHTML = '<p class="empty">No junior lawyers have been added yet.</p>';
+            return;
+        }
+
+        lawyers.forEach(lawyer => {
+            const card = document.createElement("div");
+            card.className = "lawyer";
+
+            const name = document.createElement("h3");
+            name.textContent = lawyer.name || "Unnamed lawyer";
+            card.appendChild(name);
+
+            [
+                ["Specialization", lawyer.specialization],
+                ["Phone", lawyer.phone],
+                ["Email", lawyer.email],
+                ["Address", lawyer.address],
+                ["Experience", lawyer.experience]
+            ].forEach(([label, value]) => {
+                const p = document.createElement("p");
+                p.textContent = label + ": " + (value || "Not provided");
+                card.appendChild(p);
+            });
+
+            lawyerList.appendChild(card);
+        });
+    } catch (error) {
+        lawyerList.textContent = error.message;
+    }
+}
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    message.textContent = "Saving lawyer...";
+
+    const formData = new FormData(form);
+    const lawyer = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch("/api/admin/junior-lawyers", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(lawyer)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || data.success === false) {
+            throw new Error(data.message || "Could not add lawyer.");
+        }
+
+        message.textContent = data.message || "Junior lawyer added successfully!";
+        form.reset();
+        await loadLawyers();
+
+    } catch (error) {
+        message.textContent = error.message;
+    }
+});
+
+(async function startPage() {
+    if (await checkAdmin()) {
+        await loadLawyers();
+    }
+})();
+</script>
+</body>
+</html>

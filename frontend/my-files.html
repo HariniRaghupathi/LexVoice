@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Files | LexVoice</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #071A1F;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #0B252A;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #24494F;
+        }
+
+        header h2 {
+            color: #D7B56D;
+        }
+
+        .back {
+            color: #D7B56D;
+            text-decoration: none;
+            border: 1px solid #D7B56D;
+            padding: 9px 16px;
+            border-radius: 8px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #D7B56D;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #9DB4B8;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: #102F35;
+            border: 1px solid #24494F;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            color: #D7B56D;
+            margin-bottom: 18px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            background: #071A1F;
+            border: 1px solid #35585E;
+            border-radius: 8px;
+            color: #ffffff;
+            margin-bottom: 18px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .upload-btn {
+            background: #D7B56D;
+            color: #071A1F;
+        }
+
+        .download-btn {
+            background: #D7B56D;
+            color: #071A1F;
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 7px;
+            display: inline-block;
+            font-size: 13px;
+        }
+
+        .delete-btn {
+            background: #9b3d3d;
+            color: white;
+            margin-left: 7px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 17px 0;
+            border-bottom: 1px solid #35585E;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-name {
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .file-date {
+            color: #9DB4B8;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .file-actions {
+            flex-shrink: 0;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #D7B56D;
+        }
+
+        #fileList {
+            color: #9DB4B8;
+        }
+
+        @media(max-width: 600px) {
+            header {
+                padding: 17px 5%;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .file-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .file-actions {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>LexVoice</h2>
+    <a href="/dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<div class="container">
+
+    <h1>My Files 📁</h1>
+    <p class="subtitle">Upload and manage your legal documents securely.</p>
+
+    <section class="panel">
+        <h3>Upload a Document</h3>
+
+        <form id="uploadForm">
+            <input
+                type="file"
+                id="fileInput"
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                required
+            >
+
+            <button type="submit" class="upload-btn" id="uploadButton">
+                Upload File
+            </button>
+        </form>
+
+        <p id="message"></p>
+        <p style="color:#9DB4B8;font-size:12px;margin-top:10px;">
+            Allowed formats: PDF, DOC, DOCX, JPG, JPEG and PNG.
+            Maximum file size: 10 MB.
+        </p>
+    </section>
+
+    <section class="panel">
+        <h3>My Uploaded Documents</h3>
+        <div id="fileList">Loading your files...</div>
+    </section>
+
+</div>
+
+<script>
+    const fileList = document.getElementById("fileList");
+    const message = document.getElementById("message");
+    const uploadForm = document.getElementById("uploadForm");
+    const fileInput = document.getElementById("fileInput");
+    const uploadButton = document.getElementById("uploadButton");
+
+    async function loadFiles() {
+        fileList.textContent = "Loading your files...";
+
+        try {
+            const response = await fetch("/api/my-files", {
+                credentials: "same-origin"
+            });
+
+            if (response.status === 401 || response.status === 403) {
+                window.location.href = "/login";
+                return;
+            }
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || "Unable to load files.");
+            }
+
+            fileList.innerHTML = "";
+
+            if (!data.files || data.files.length === 0) {
+                fileList.textContent = "You have not uploaded any documents yet.";
+                return;
+            }
+
+            data.files.forEach(file => {
+                const item = document.createElement("div");
+                item.className = "file-item";
+
+                const details = document.createElement("div");
+
+                const name = document.createElement("div");
+                name.className = "file-name";
+                name.textContent = "📄 " + file.filename;
+
+                const date = document.createElement("div");
+                date.className = "file-date";
+                date.textContent = "Uploaded: " +
+                    (file.created_at || "Date unavailable");
+
+                details.appendChild(name);
+                details.appendChild(date);
+
+                const actions = document.createElement("div");
+                actions.className = "file-actions";
+
+                const download = document.createElement("a");
+                download.className = "download-btn";
+                download.href = "/api/files/" +
+                    encodeURIComponent(file.id) + "/download";
+                download.textContent = "Download";
+
+                const deleteButton = document.createElement("button");
+                deleteButton.className = "delete-btn";
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => {
+                    deleteFile(file.id, file.filename);
+                });
+
+                actions.appendChild(download);
+                actions.appendChild(deleteButton);
+
+                item.appendChild(details);
+                item.appendChild(actions);
+
+                fileList.appendChild(item);
+            });
+
+        } catch (error) {
+            fileList.textContent = error.message ||
+                "Unable to connect to the server.";
+        }
+    }
+
+    uploadForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const file = fileInput.files[0];
+
+        if (!file) {
+            message.textContent = "Please select a file.";
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            message.textContent = "File size must not exceed 10 MB.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        uploadButton.disabled = true;
+        uploadButton.textContent = "Uploading...";
+        message.textContent = "";
+
+        try {
+            const response = await fetch("/api/my-files", {
+                method: "POST",
+                body: formData,
+                credentials: "same-origin"
+            });
+
+            const data = await response.json();
+
+            if (response.status === 401 || response.status === 403) {
+                window.location.href = "/login";
+                return;
+            }
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || "Upload failed.");
+            }
+
+            message.textContent = "File uploaded successfully!";
+            uploadForm.reset();
+            await loadFiles();
+
+        } catch (error) {
+            message.textContent = error.message ||
+                "Unable to upload the file.";
+        } finally {
+            uploadButton.disabled = false;
+            uploadButton.textContent = "Upload File";
+        }
+    });
+
+    async function deleteFile(fileId, filename) {
+        if (!confirm("Are you sure you want to delete " + filename + "?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/my-files/" +
+                encodeURIComponent(fileId), {
+                method: "DELETE",
+                credentials: "same-origin"
+            });
+
+            const data = await response.json();
+
+            if (response.status === 401 || response.status === 403) {
+                window.location.href = "/login";
+                return;
+            }
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || "Unable to delete file.");
+            }
+
+            message.textContent = "File deleted successfully.";
+            await loadFiles();
+
+        } catch (error) {
+            message.textContent = error.message ||
+                "Unable to delete the file.";
+        }
+    }
+
+    loadFiles();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice - Civil Law</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#071A1F;
+    color:#E8F1F2;
+    line-height:1.6;
+}
+
+header{
+    background:#102F35;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #D7B56D;
+}
+
+.logo{
+    color:#D7B56D;
+    font-size:27px;
+    font-weight:bold;
+}
+
+nav a{
+    color:#E8F1F2;
+    text-decoration:none;
+    margin-left:22px;
+    font-size:15px;
+}
+
+nav a:hover{
+    color:#D7B56D;
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px;
+    background:linear-gradient(135deg,#071A1F,#123B42);
+}
+
+.hero h1{
+    font-size:50px;
+    color:#D7B56D;
+    margin-bottom:15px;
+}
+
+.hero p{
+    max-width:750px;
+    margin:auto;
+    color:#C8D8DA;
+}
+
+.container{
+    width:86%;
+    max-width:1100px;
+    margin:45px auto;
+}
+
+.search{
+    width:100%;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #D7B56D;
+    background:#102F35;
+    color:white;
+    margin-bottom:35px;
+    outline:none;
+}
+
+.section-title{
+    color:#D7B56D;
+    margin:35px 0 20px;
+    font-size:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#102F35;
+    padding:25px;
+    border-radius:12px;
+    border:1px solid #28545B;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#D7B56D;
+}
+
+.card h3{
+    color:#D7B56D;
+    margin-bottom:10px;
+}
+
+.info{
+    background:#102F35;
+    padding:28px;
+    border-left:4px solid #D7B56D;
+    margin-top:25px;
+    border-radius:8px;
+}
+
+ul{
+    margin-left:25px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:60px;
+    background:#102F35;
+    color:#AFC3C6;
+}
+
+@media(max-width:800px){
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        text-align:center;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:5px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚖ LexVoice</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="laws.html">Laws</a>
+        <a href="lawyers.html">Lawyers</a>
+        <a href="complaint.html">Complaint</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Civil Law</h1>
+    <p>
+        Understand civil disputes, legal rights, remedies and court procedures
+        in simple language.
+    </p>
+</section>
+
+<div class="container">
+
+<input type="text" class="search" id="search"
+placeholder="Search Civil Law topics..." onkeyup="searchTopics()">
+
+<h2 class="section-title">What is Civil Law?</h2>
+
+<div class="info">
+    <p>
+        Civil law deals mainly with disputes between individuals,
+        organizations or other private parties. It commonly concerns
+        rights, duties, property, contracts, compensation and other
+        non-criminal matters.
+    </p>
+</div>
+
+<h2 class="section-title">Major Areas of Civil Law</h2>
+
+<div class="cards" id="topics">
+
+<div class="card">
+<h3>Property Disputes</h3>
+<p>Disputes relating to ownership, possession, transfer and use of property.</p>
+</div>
+
+<div class="card">
+<h3>Contract Law</h3>
+<p>Deals with agreements, contractual obligations, breaches and remedies.</p>
+</div>
+
+<div class="card">
+<h3>Tort Law</h3>
+<p>Concerns civil wrongs and claims for compensation or other remedies.</p>
+</div>
+
+<div class="card">
+<h3>Recovery of Money</h3>
+<p>Legal procedures for recovering money owed under applicable law.</p>
+</div>
+
+<div class="card">
+<h3>Injunctions</h3>
+<p>Court orders that may require a person to do or stop doing a particular act.</p>
+</div>
+
+<div class="card">
+<h3>Civil Appeals</h3>
+<p>Legal procedures for challenging certain decisions of civil courts.</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Common Civil Remedies</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Compensation</h3>
+<p>Financial relief may be awarded where legally justified.</p>
+</div>
+
+<div class="card">
+<h3>Injunction</h3>
+<p>A court may grant an order concerning a particular act or conduct.</p>
+</div>
+
+<div class="card">
+<h3>Declaration</h3>
+<p>A court may formally determine or declare a legal right or status.</p>
+</div>
+
+<div class="card">
+<h3>Specific Relief</h3>
+<p>Certain legal remedies may require performance of an obligation.</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Important Civil Law Principles</h2>
+
+<div class="info">
+<ul>
+<li>Rights and obligations between parties</li>
+<li>Burden of proof in civil proceedings</li>
+<li>Evidence and documentation</li>
+<li>Alternative dispute resolution</li>
+<li>Court-based remedies</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+© 2026 LexVoice | Educational Legal Information Portal
+</footer>
+
+<script>
+function searchTopics(){
+    let input=document.getElementById("search").value.toLowerCase();
+    let cards=document.querySelectorAll("#topics .card");
+
+    cards.forEach(card=>{
+        card.style.display=
+        card.innerText.toLowerCase().includes(input)
+        ? "block" : "none";
+    });
+}
+</script>
+
+</body>
+</html>

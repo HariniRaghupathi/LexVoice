@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LexVoice - Women Law</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#071A1F;
+color:#E8F1F2;
+line-height:1.6;
+}
+
+header{
+background:#102F35;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid #D7B56D;
+}
+
+.logo{
+font-size:27px;
+font-weight:bold;
+color:#D7B56D;
+}
+
+nav a{
+color:#E8F1F2;
+text-decoration:none;
+margin-left:20px;
+}
+
+nav a:hover{
+color:#D7B56D;
+}
+
+.hero{
+text-align:center;
+padding:70px 20px;
+background:linear-gradient(135deg,#071A1F,#123B42);
+}
+
+.hero h1{
+font-size:48px;
+color:#D7B56D;
+}
+
+.hero p{
+max-width:780px;
+margin:15px auto;
+color:#C8D8DA;
+}
+
+.container{
+width:86%;
+max-width:1100px;
+margin:45px auto;
+}
+
+.search{
+width:100%;
+padding:15px;
+background:#102F35;
+border:1px solid #D7B56D;
+color:white;
+border-radius:8px;
+}
+
+.title{
+color:#D7B56D;
+margin:35px 0 20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:20px;
+}
+
+.card{
+background:#102F35;
+padding:25px;
+border-radius:12px;
+border:1px solid #28545B;
+}
+
+.card:hover{
+border-color:#D7B56D;
+transform:translateY(-4px);
+}
+
+.card h3{
+color:#D7B56D;
+margin-bottom:10px;
+}
+
+.info{
+background:#102F35;
+padding:25px;
+border-left:4px solid #D7B56D;
+border-radius:8px;
+}
+
+ul{
+margin-left:25px;
+}
+
+footer{
+margin-top:60px;
+padding:25px;
+text-align:center;
+background:#102F35;
+color:#AFC3C6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">⚖ LexVoice</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="laws.html">Laws</a>
+<a href="lawyers.html">Lawyers</a>
+<a href="complaint.html">Complaint</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Women & Law</h1>
+<p>
+Learn about legal protections, workplace rights, family-related rights
+and legal remedies available under applicable Indian laws.
+</p>
+</section>
+
+<div class="container">
+
+<input id="search" class="search"
+placeholder="Search Women Law topics..."
+onkeyup="searchTopics()">
+
+<h2 class="title">Overview</h2>
+
+<div class="info">
+<p>
+Indian law contains various constitutional provisions and statutes
+addressing equality, safety, employment, family matters and protection
+from unlawful discrimination or violence.
+</p>
+</div>
+
+<h2 class="title">Important Areas</h2>
+
+<div class="cards" id="topics">
+
+<div class="card">
+<h3>Equality</h3>
+<p>Constitutional principles provide important protections concerning equality and non-discrimination.</p>
+</div>
+
+<div class="card">
+<h3>Workplace Safety</h3>
+<p>Legal protections address sexual harassment and workplace safety.</p>
+</div>
+
+<div class="card">
+<h3>Domestic Violence</h3>
+<p>Legal mechanisms are available concerning domestic violence and related protection.</p>
+</div>
+
+<div class="card">
+<h3>Marriage & Family</h3>
+<p>Family laws address matters such as marriage, maintenance and other family disputes.</p>
+</div>
+
+<div class="card">
+<h3>Maternity Rights</h3>
+<p>Employment law provides protections concerning maternity in applicable circumstances.</p>
+</div>
+
+<div class="card">
+<h3>Legal Remedies</h3>
+<p>Courts and appropriate authorities may provide remedies depending on the matter.</p>
+</div>
+
+</div>
+
+<h2 class="title">Legal Awareness</h2>
+
+<div class="info">
+<ul>
+<li>Know your constitutional and statutory rights</li>
+<li>Keep important documents and evidence safely</li>
+<li>Seek professional legal assistance when necessary</li>
+<li>Use appropriate official complaint mechanisms</li>
+<li>In emergencies, contact appropriate emergency services</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+© 2026 LexVoice | Educational Legal Information Portal
+</footer>
+
+<script>
+function searchTopics(){
+let value=document.getElementById("search").value.toLowerCase();
+
+document.querySelectorAll("#topics .card").forEach(card=>{
+card.style.display=
+card.innerText.toLowerCase().includes(value)
+?"block":"none";
+});
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Junior Lawyers | LexVoice</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+    --bg: #071A1F;
+    --panel: #102F35;
+    --panel-dark: #0B252A;
+    --gold: #D7B56D;
+    --text: #E8F1F2;
+    --muted: #9DB4B8;
+    --border: #24494F;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 5%, rgba(215,181,109,.09), transparent 30%),
+        radial-gradient(circle at 90% 40%, rgba(35,110,105,.13), transparent 35%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    background: rgba(16,47,53,.96);
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+header a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+header a:hover {
+    color: white;
+}
+
+/* HERO */
+
+.hero {
+    padding: 75px 20px 45px;
+    text-align: center;
+    position: relative;
+}
+
+.hero-tag {
+    display: inline-block;
+    color: var(--gold);
+    border: 1px solid rgba(215,181,109,.4);
+    background: rgba(215,181,109,.08);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(32px, 5vw, 49px);
+    color: var(--text);
+    margin-bottom: 15px;
+    font-weight: 750;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 620px;
+    margin: auto;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 15px 25px 70px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    color: var(--gold);
+    font-size: 23px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* SEARCH */
+
+.search-wrapper {
+    max-width: 650px;
+    margin: 0 auto 40px;
+    position: relative;
+}
+
+.search-wrapper span {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 19px;
+    color: var(--gold);
+}
+
+.search-box {
+    width: 100%;
+    padding: 17px 20px 17px 50px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+.search-box:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(215,181,109,.1);
+}
+
+.search-box::placeholder {
+    color: #829B9F;
+}
+
+/* LAWYER CARDS */
+
+.lawyer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.lawyer-card {
+    background: linear-gradient(145deg, #12363C, #0B252A);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 27px;
+    position: relative;
+    overflow: hidden;
+    transition: .35s ease;
+    animation: fadeIn .5s ease;
+}
+
+.lawyer-card::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgba(215,181,109,.12);
+    border-radius: 50%;
+    right: -55px;
+    top: -55px;
+}
+
+.lawyer-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+}
+
+.profile-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+    background: rgba(215,181,109,.12);
+    border: 1px solid rgba(215,181,109,.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.lawyer-card h2 {
+    color: var(--gold);
+    font-size: 21px;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+.specialization-tag {
+    display: inline-block;
+    background: rgba(215,181,109,.1);
+    color: var(--gold);
+    border: 1px solid rgba(215,181,109,.25);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.lawyer-card p {
+    color: #C5D3D5;
+    margin: 11px 0;
+    line-height: 1.6;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.lawyer-card strong {
+    color: var(--gold);
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    gap: 11px;
+    margin-top: 23px;
+    flex-wrap: wrap;
+}
+
+.buttons a,
+.buttons button {
+    flex: 1;
+    min-width: 110px;
+    padding: 11px 19px;
+    border-radius: 9px;
+    font-weight: 650;
+    font-size: 13px;
+    transition: .3s;
+    text-align: center;
+    text-decoration: none;
+}
+
+.copy-btn {
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #E9CB8A;
+    transform: translateY(-2px);
+}
+
+.copy-btn:disabled {
+    opacity: .8;
+    cursor: default;
+}
+
+.email-btn {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.email-btn:hover {
+    background: rgba(215,181,109,.12);
+    transform: translateY(-2px);
+}
+
+/* MESSAGES */
+
+.message {
+    text-align: center;
+    color: var(--muted);
+    padding: 45px 20px;
+    grid-column: 1 / -1;
+    background: var(--panel-dark);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    line-height: 1.8;
+}
+
+.message-icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 27px 15px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.8;
+    background: rgba(11,37,42,.7);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 17px 5%;
+    }
+
+    .hero {
+        padding: 55px 20px 35px;
+    }
+
+    .container {
+        padding: 10px 17px 50px;
+    }
+
+    .lawyer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .buttons a,
+    .buttons button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">LEXVOICE</div>
+    <a href="/index.html">← Back to Home</a>
+</header>
+
+<section class="hero">
+    <div class="hero-tag">LEXVOICE LEGAL NETWORK</div>
+    <h1>Meet Our <span>Junior Lawyers</span></h1>
+    <p>
+        Connect with junior legal professionals, explore their areas
+        of specialization and find contact information.
+    </p>
+</section>
+
+<main class="container">
+
+    <div class="section-heading">
+        <div>
+            <h2>Junior Advocate Directory</h2>
+            <p>Explore available junior legal professionals.</p>
+        </div>
+    </div>
+
+    <div class="search-wrapper">
+        <span>⌕</span>
+        <input
+            type="text"
+            id="searchInput"
+            class="search-box"
+            placeholder="Search by name or specialization..."
+            oninput="searchLawyers()"
+        >
+    </div>
+
+    <div class="lawyer-grid" id="lawyerList">
+        <div class="message">
+            <span class="message-icon">⚖</span>
+            Loading junior lawyers...
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    © 2026 LexVoice | Multilingual Legal Assistant
+    <br>
+    Connecting people with legal professionals.
+</footer>
+
+<script>
+
+let allLawyers = [];
+
+/* COPY MOBILE NUMBER */
+
+async function copyNumber(number, button) {
+    const originalText = button.textContent;
+
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(number);
+        } else {
+            const textArea = document.createElement("textarea");
+            textArea.value = number;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+
+            document.body.appendChild(textArea);
+            textArea.select();
+
+            const copied = document.execCommand("copy");
+            textArea.remove();
+
+            if (!copied) {
+                throw new Error("Copy failed");
+            }
+        }
+
+        button.textContent = "✓ Copied!";
+        button.disabled = true;
+
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+        }, 1500);
+
+    } catch (error) {
+        alert("Unable to copy. Please copy this number manually: " + number);
+    }
+}
+
+/* LOAD JUNIOR LAWYERS */
+
+async function loadLawyers() {
+    const container = document.getElementById("lawyerList");
+
+    try {
+        const response = await fetch("/api/junior-lawyers");
+        const data = await response.json();
+
+        if (!response.ok || data.success === false) {
+            throw new Error(data.message || "Unable to load lawyers.");
+        }
+
+        allLawyers = Array.isArray(data)
+            ? data
+            : (data.lawyers || []);
+
+        displayLawyers(allLawyers);
+
+    } catch (error) {
+        container.replaceChildren();
+
+        const message = document.createElement("div");
+        message.className = "message";
+        message.textContent =
+            "Unable to load junior lawyers. Please check your connection and try again.";
+
+        container.appendChild(message);
+        console.error("Junior lawyer loading error:", error);
+    }
+}
+
+/* DISPLAY LAWYER DETAILS */
+
+function addText(parent, tag, label, value) {
+    const element = document.createElement(tag);
+
+    if (label) {
+        const strong = document.createElement("strong");
+        strong.textContent = label + ": ";
+        element.appendChild(strong);
+    }
+
+    element.appendChild(
+        document.createTextNode(value || "Not provided")
+    );
+
+    parent.appendChild(element);
+}
+
+/* CREATE LAWYER CARDS */
+
+function displayLawyers(lawyers) {
+    const container = document.getElementById("lawyerList");
+    container.replaceChildren();
+
+    if (!lawyers.length) {
+        const message = document.createElement("div");
+        message.className = "message";
+
+        const icon = document.createElement("span");
+        icon.className = "message-icon";
+        icon.textContent = "⚖";
+
+        message.appendChild(icon);
+        message.appendChild(
+            document.createTextNode("No junior lawyers found.")
+        );
+
+        container.appendChild(message);
+        return;
+    }
+
+    lawyers.forEach(lawyer => {
+        const card = document.createElement("div");
+        card.className = "lawyer-card";
+
+        const icon = document.createElement("div");
+        icon.className = "profile-icon";
+        icon.textContent = "⚖";
+        card.appendChild(icon);
+
+        const name = document.createElement("h2");
+        name.textContent = lawyer.name || "Lawyer";
+        card.appendChild(name);
+
+        const specialization = document.createElement("div");
+        specialization.className = "specialization-tag";
+        specialization.textContent =
+            lawyer.specialization || "General Practice";
+        card.appendChild(specialization);
+
+        addText(card, "p", "Phone", lawyer.phone);
+        addText(card, "p", "Email", lawyer.email);
+        addText(card, "p", "Address", lawyer.address);
+        addText(card, "p", "Experience", lawyer.experience);
+
+        const buttons = document.createElement("div");
+        buttons.className = "buttons";
+
+        /* COPY NUMBER BUTTON */
+
+        if (lawyer.phone) {
+            const copy = document.createElement("button");
+            copy.type = "button";
+            copy.className = "copy-btn";
+            copy.textContent = "📋 Copy Number";
+
+            copy.addEventListener("click", function() {
+                copyNumber(lawyer.phone, copy);
+            });
+
+            buttons.appendChild(copy);
+        }
+
+        /* EMAIL BUTTON */
+
+        if (lawyer.email) {
+            const email = document.createElement("a");
+            email.className = "email-btn";
+            email.href = "mailto:" + lawyer.email;
+            email.textContent = "✉ Email";
+
+            buttons.appendChild(email);
+        }
+
+        if (buttons.children.length > 0) {
+            card.appendChild(buttons);
+        }
+
+        container.appendChild(card);
+    });
+}
+
+/* SEARCH LAWYERS */
+
+function searchLawyers() {
+    const search = document.getElementById("searchInput")
+        .value.toLowerCase().trim();
+
+    const filtered = allLawyers.filter(lawyer =>
+        (lawyer.name || "").toLowerCase().includes(search) ||
+        (lawyer.specialization || "").toLowerCase().includes(search)
+    );
+
+    displayLawyers(filtered);
+}
+
+/* START */
+
+loadLawyers();
+
+</script>
+
+</body>
+</html>

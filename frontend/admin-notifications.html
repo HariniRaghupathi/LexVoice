@@ -1,0 +1,382 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Notifications | LexVoice</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #071A1F;
+    color: #E8F1F2;
+    min-height: 100vh;
+}
+
+header {
+    background: #102F35;
+    padding: 20px 7%;
+    border-bottom: 1px solid #35585E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    color: #D7B56D;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.back {
+    color: #D7B56D;
+    text-decoration: none;
+    border: 1px solid #D7B56D;
+    padding: 9px 16px;
+    border-radius: 8px;
+}
+
+.container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 35px auto;
+}
+
+h1, h2 {
+    color: #D7B56D;
+}
+
+h1 {
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #B7CBCD;
+    margin-bottom: 28px;
+}
+
+.panel {
+    background: #102F35;
+    border: 1px solid #24494F;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    margin-bottom: 20px;
+    font-size: 21px;
+}
+
+label {
+    display: block;
+    color: #C7D8DA;
+    margin: 15px 0 8px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 13px;
+    background: #071A1F;
+    border: 1px solid #35585E;
+    border-radius: 8px;
+    color: #E8F1F2;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #D7B56D;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.primary {
+    background: #D7B56D;
+    color: #071A1F;
+    margin-top: 18px;
+}
+
+.primary:hover {
+    background: #E8C982;
+}
+
+.secondary {
+    background: #24494F;
+    color: #E8F1F2;
+}
+
+.message {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+.error {
+    background: #552C2C;
+    color: #FFBABA;
+}
+
+.success {
+    background: #1D464B;
+    color: #A8E6C1;
+}
+
+.notification {
+    border: 1px solid #35585E;
+    border-left: 4px solid #D7B56D;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow-wrap: anywhere;
+}
+
+.notification h3 {
+    color: #D7B56D;
+    margin-bottom: 8px;
+}
+
+.notification p {
+    line-height: 1.6;
+}
+
+.meta {
+    color: #9DB4B8;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.empty {
+    color: #B7CBCD;
+    text-align: center;
+    padding: 30px 10px;
+    border: 1px dashed #35585E;
+    border-radius: 10px;
+}
+
+.section-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+}
+
+@media(max-width: 600px) {
+    .container {
+        width: 92%;
+    }
+
+    .panel {
+        padding: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚖ LexVoice Admin</div>
+    <a href="/admin.html" class="back">← Admin Dashboard</a>
+</header>
+
+<main class="container">
+
+    <h1>🔔 Admin Notifications Center</h1>
+    <p class="subtitle">
+        Manage platform announcements and view your notifications.
+    </p>
+
+    <section class="panel">
+        <h2>📢 Send Announcement</h2>
+
+        <form id="announcementForm">
+            <label for="title">Announcement Title</label>
+            <input
+                type="text"
+                id="title"
+                maxlength="150"
+                placeholder="Enter announcement title"
+                required
+            >
+
+            <label for="announcementMessage">Message</label>
+            <textarea
+                id="announcementMessage"
+                maxlength="3000"
+                placeholder="Write your announcement for all users..."
+                required
+            ></textarea>
+
+            <button type="submit" class="primary" id="sendButton">
+                Send to All Users
+            </button>
+        </form>
+
+        <div id="formMessage" class="message"></div>
+    </section>
+
+    <section class="panel">
+        <h2>📬 Admin Notifications</h2>
+
+        <div class="section-actions">
+            <button class="secondary" onclick="loadAdminNotifications()">
+                ↻ Refresh
+            </button>
+        </div>
+
+        <div id="notificationList">
+            <div class="empty">Loading notifications...</div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+const form = document.getElementById("announcementForm");
+const formMessage = document.getElementById("formMessage");
+const sendButton = document.getElementById("sendButton");
+const notificationList = document.getElementById("notificationList");
+
+function showFormMessage(message, type) {
+    formMessage.textContent = message;
+    formMessage.className = "message " + type;
+    formMessage.style.display = "block";
+}
+
+async function loadAdminNotifications() {
+    notificationList.innerHTML =
+        "<div class='empty'>Loading notifications...</div>";
+
+    try {
+        const response = await fetch("/api/admin/notifications");
+        const data = await response.json();
+
+        if (response.status === 401) {
+            notificationList.innerHTML =
+                "<div class='empty'>Admin login required. Please log in again.</div>";
+            return;
+        }
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to load notifications.");
+        }
+
+        notificationList.innerHTML = "";
+
+        if (!data.notifications || data.notifications.length === 0) {
+            notificationList.innerHTML = `
+                <div class="empty">
+                    <h3>No admin notifications yet</h3>
+                    <p>New admin notifications will appear here.</p>
+                </div>
+            `;
+            return;
+        }
+
+        data.notifications.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "notification";
+
+            const heading = document.createElement("h3");
+            heading.textContent = item.title;
+
+            const message = document.createElement("p");
+            message.textContent = item.message;
+
+            const meta = document.createElement("div");
+            meta.className = "meta";
+            meta.textContent =
+                (item.notification_type || "general") +
+                " • " + (item.created_at || "");
+
+            card.append(heading, message, meta);
+            notificationList.appendChild(card);
+        });
+
+    } catch (error) {
+        notificationList.innerHTML =
+            "<div class='empty'>Unable to load notifications. Please refresh.</div>";
+    }
+}
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    formMessage.style.display = "none";
+
+    const title = document.getElementById("title").value.trim();
+    const message = document.getElementById("announcementMessage").value.trim();
+
+    if (!title || !message) {
+        showFormMessage("Please enter both title and message.", "error");
+        return;
+    }
+
+    sendButton.disabled = true;
+    sendButton.textContent = "Sending...";
+
+    try {
+        const response = await fetch(
+            "/api/admin/notifications/announcement",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: title,
+                    message: message
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Announcement could not be sent.");
+        }
+
+        showFormMessage(
+            data.message || "Announcement sent successfully to all users!",
+            "success"
+        );
+
+        form.reset();
+
+    } catch (error) {
+        showFormMessage(error.message, "error");
+
+    } finally {
+        sendButton.disabled = false;
+        sendButton.textContent = "Send to All Users";
+    }
+});
+
+loadAdminNotifications();
+</script>
+
+</body>
+</html>
+```

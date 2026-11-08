@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LexVoice | Criminal Law</title>
+
+<style>
+
+/* =====================================
+   GLOBAL SETTINGS
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#071A1F;
+    color:#E8F1F2;
+    line-height:1.6;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+header{
+    height:78px;
+
+    background:#0B252A;
+
+    border-bottom:1px solid #29494F;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+}
+
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:#D7B56D;
+
+    font-size:25px;
+
+    font-weight:700;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+
+    border:2px solid #D7B56D;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+}
+
+
+/* NAVIGATION */
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+
+    color:#C7D8DA;
+
+    font-size:14px;
+
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#D7B56D;
+}
+
+
+/* =====================================
+   HERO SECTION
+===================================== */
+
+.hero{
+
+    padding:80px 8%;
+
+    background:
+        radial-gradient(
+            circle at 80% 25%,
+            #173C42 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            #102F35 0%,
+            transparent 30%
+        ),
+        #071A1F;
+
+    border-bottom:1px solid #203E43;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:7px 15px;
+
+    border:1px solid #665936;
+
+    border-radius:30px;
+
+    color:#D7B56D;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+
+    font-size:52px;
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#D7B56D;
+}
+
+.hero p{
+
+    max-width:800px;
+
+    color:#AFC3C6;
+
+    font-size:17px;
+}
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+.search-section{
+
+    padding:35px 8%;
+
+    background:#0B252A;
+}
+
+.search-box{
+
+    max-width:850px;
+
+    margin:auto;
+
+    position:relative;
+}
+
+.search-box input{
+
+    width:100%;
+
+    padding:16px 20px;
+
+    background:#071A1F;
+
+    border:1px solid #3A5B60;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.search-box input:focus{
+
+    border-color:#D7B56D;
+}
+
+.search-icon{
+
+    position:absolute;
+
+    right:18px;
+
+    top:12px;
+
+    color:#D7B56D;
+
+    font-size:22px;
+}
+
+
+/* =====================================
+   MAIN CONTAINER
+===================================== */
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:65px 25px;
+}
+
+.section-title{
+
+    color:#D7B56D;
+
+    font-size:32px;
+
+    margin-bottom:10px;
+}
+
+.section-description{
+
+    color:#9DB4B8;
+
+    margin-bottom:30px;
+}
+
+
+/* =====================================
+   INTRODUCTION
+===================================== */
+
+.introduction{
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:15px;
+
+    padding:30px;
+
+    margin-bottom:55px;
+}
+
+.introduction p{
+
+    color:#B7C9CB;
+}
+
+.highlight{
+
+    color:#D7B56D;
+
+    font-weight:600;
+}
+
+
+/* =====================================
+   LAW CATEGORIES
+===================================== */
+
+.card-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:22px;
+
+    margin-bottom:60px;
+}
+
+.card{
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:14px;
+
+    padding:28px;
+
+    transition:.3s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:4px;
+    height:100%;
+
+    background:#D7B56D;
+
+    transform:scaleY(0);
+
+    transition:.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#D7B56D;
+}
+
+.card:hover::before{
+
+    transform:scaleY(1);
+}
+
+.card-icon{
+
+    font-size:30px;
+
+    margin-bottom:15px;
+}
+
+.card h3{
+
+    margin-bottom:10px;
+
+    color:#E8F1F2;
+}
+
+.card p{
+
+    color:#9DB4B8;
+
+    font-size:14px;
+}
+
+
+/* =====================================
+   IMPORTANT OFFENCES TABLE
+===================================== */
+
+.table-container{
+
+    overflow-x:auto;
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:14px;
+
+    margin-bottom:60px;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+th{
+
+    background:#0B252A;
+
+    color:#D7B56D;
+
+    text-align:left;
+
+    padding:16px;
+}
+
+td{
+
+    padding:15px;
+
+    color:#B7C9CB;
+
+    border-top:1px solid #29494F;
+}
+
+tr:hover td{
+
+    background:#12343A;
+}
+
+.offence{
+
+    color:#D7B56D;
+
+    font-weight:600;
+}
+
+
+/* =====================================
+   CRIMINAL PROCEDURE
+===================================== */
+
+.procedure{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:60px;
+}
+
+.step{
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.step-number{
+
+    width:42px;
+
+    height:42px;
+
+    margin:0 auto 15px;
+
+    border-radius:50%;
+
+    background:#D7B56D;
+
+    color:#071A1F;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:bold;
+}
+
+.step h3{
+
+    margin-bottom:8px;
+}
+
+.step p{
+
+    color:#9DB4B8;
+
+    font-size:13px;
+}
+
+
+/* =====================================
+   LEGAL CONCEPTS
+===================================== */
+
+.concept{
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    margin-bottom:15px;
+}
+
+.concept h3{
+
+    color:#D7B56D;
+
+    margin-bottom:8px;
+}
+
+.concept p{
+
+    color:#AFC3C6;
+
+    font-size:14px;
+}
+
+
+/* =====================================
+   RIGHTS
+===================================== */
+
+.rights-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+
+    margin-bottom:60px;
+}
+
+.right{
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:12px;
+
+    padding:25px;
+}
+
+.right h3{
+
+    color:#D7B56D;
+
+    margin-bottom:8px;
+}
+
+.right p{
+
+    color:#AFC3C6;
+
+    font-size:14px;
+}
+
+
+/* =====================================
+   LEGAL NOTICE
+===================================== */
+
+.notice{
+
+    margin-top:50px;
+
+    padding:25px;
+
+    background:#102F35;
+
+    border-left:4px solid #D7B56D;
+
+    color:#AFC3C6;
+}
+
+.notice strong{
+
+    color:#D7B56D;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer{
+
+    background:#06161A;
+
+    border-top:1px solid #203E43;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#81979B;
+}
+
+.footer-logo{
+
+    color:#D7B56D;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+
+/* =====================================
+   MOBILE RESPONSIVE
+===================================== */
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
+    }
+
+    .card-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .procedure{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+}
+
+@media(max-width:600px){
+
+    .card-grid,
+    .procedure,
+    .rights-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:60px 6%;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .container{
+        padding:45px 18px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ⚖
+        </div>
+
+        LexVoice
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="laws.html">
+            Laws
+        </a>
+
+        <a href="lawyers.html">
+            Lawyers
+        </a>
+
+        <a href="complaint.html">
+            Complaint
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            INDIAN LEGAL INFORMATION
+        </div>
+
+        <h1>
+
+            Criminal
+            <span>Law</span>
+
+        </h1>
+
+        <p>
+
+            Explore criminal-law concepts, offences,
+            criminal procedure, rights of accused persons
+            and other important legal information through
+            the LexVoice platform.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     SEARCH
+===================================== -->
+
+<section class="search-section">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search criminal law topics, offences or concepts..."
+            onkeyup="searchContent()"
+        >
+
+        <span class="search-icon">
+            ⌕
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     MAIN CONTENT
+===================================== -->
+
+<main class="container">
+
+
+<!-- =====================================
+     INTRODUCTION
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+        Understanding Criminal Law
+    </h2>
+
+    <p class="section-description">
+        Basic information about the criminal justice system.
+    </p>
+
+
+    <div class="introduction">
+
+        <p>
+
+            <span class="highlight">
+                Criminal law
+            </span>
+
+            deals with conduct that is treated as an offence
+            under applicable law and establishes rules concerning
+            investigation, prosecution, adjudication and punishment.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            In India, the criminal-law framework includes substantive
+            criminal law, criminal procedure and rules concerning
+            evidence. The applicable statutory framework should
+            always be checked for the particular matter and date.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     MAJOR AREAS
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+        Major Areas of Criminal Law
+    </h2>
+
+    <p class="section-description">
+        Explore important criminal-law topics.
+    </p>
+
+
+    <div class="card-grid" id="contentGrid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚖️
+            </div>
+
+            <h3>
+                Criminal Offences
+            </h3>
+
+            <p>
+                Information about different categories of
+                conduct that may constitute criminal offences.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔎
+            </div>
+
+            <h3>
+                Investigation
+            </h3>
+
+            <p>
+                General information about investigation and
+                collection of information in criminal cases.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                👮
+            </div>
+
+            <h3>
+                Arrest
+            </h3>
+
+            <p>
+                General information concerning arrest and
+                safeguards provided by applicable law.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏛️
+            </div>
+
+            <h3>
+                Criminal Courts
+            </h3>
+
+            <p>
+                Information about the role of courts in
+                criminal proceedings.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📋
+            </div>
+
+            <h3>
+                Bail
+            </h3>
+
+            <p>
+                General information concerning bail and
+                release during criminal proceedings.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📜
+            </div>
+
+            <h3>
+                Criminal Procedure
+            </h3>
+
+            <p>
+                Learn about major stages involved in
+                criminal proceedings.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     COMMON OFFENCE CATEGORIES
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+        Common Criminal-Law Categories
+    </h2>
+
+    <p class="section-description">
+        Examples of categories commonly encountered in criminal law.
+    </p>
+
+
+    <div class="table-container">
+
+        <table id="offenceTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Category
+                    </th>
+
+                    <th>
+                        General Description
+                    </th>
+
+                    <th>
+                        Example
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <tr>
+
+                    <td class="offence">
+                        Offences against persons
+                    </td>
+
+                    <td>
+                        Conduct involving harm or threats
+                        against individuals.
+                    </td>
+
+                    <td>
+                        Assault-related offences
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="offence">
+                        Property offences
+                    </td>
+
+                    <td>
+                        Offences involving unlawful interference
+                        with property.
+                    </td>
+
+                    <td>
+                        Theft-related offences
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="offence">
+                        Offences involving documents
+                    </td>
+
+                    <td>
+                        Offences concerning false or fraudulent
+                        documents and records.
+                    </td>
+
+                    <td>
+                        Forgery-related offences
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="offence">
+                        Cyber offences
+                    </td>
+
+                    <td>
+                        Criminal conduct involving computers,
+                        digital systems or electronic information.
+                    </td>
+
+                    <td>
+                        Certain offences under cyber laws
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="offence">
+                        Economic offences
+                    </td>
+
+                    <td>
+                        Certain offences involving financial
+                        transactions or economic activity.
+                    </td>
+
+                    <td>
+                        Fraud-related offences
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     CRIMINAL PROCEDURE
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+        General Criminal-Procedure Flow
+    </h2>
+
+    <p class="section-description">
+        A simplified representation of stages that may occur
+        in a criminal case.
+    </p>
+
+
+    <div class="procedure">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Complaint / Information
+            </h3>
+
+            <p>
+                Information concerning an alleged offence
+                may reach the appropriate authorities.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Investigation
+            </h3>
+
+            <p>
+                Authorities may investigate the alleged
+                offence according to applicable procedure.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Court Proceedings
+            </h3>
+
+            <p>
+                A matter may proceed before the appropriate
+                court according to law.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>
+                Judgment
+            </h3>
+
+            <p>
+                The court determines the matter based on
+                applicable law and evidence.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     IMPORTANT CONCEPTS
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+        Important Criminal-Law Concepts
+    </h2>
+
+    <p class="section-description">
+        Basic concepts for students and users exploring criminal law.
+    </p>
+
+
+    <div class="concept">
+
+        <h3>
+            Presumption of Innocence
+        </h3>
+
+        <p>
+            In criminal proceedings, an accused person is generally
+            treated as innocent unless guilt is established according
+            to the applicable legal process.
+        </p>
+
+    </div>
+
+
+    <div class="concept">
+
+        <h3>
+            Burden of Proof
+        </h3>
+
+        <p>
+            Criminal proceedings involve rules concerning who must
+            establish particular facts and the standard applicable
+            to proof.
+        </p>
+
+    </div>
+
+
+    <div class="concept">
+
+        <h3>
+            Evidence
+        </h3>
+
+        <p>
+            Courts consider evidence according to applicable
+            evidentiary rules when determining disputed facts.
+        </p>
+
+    </div>
+
+
+    <div class="concept">
+
+        <h3>
+            Fair Trial
+        </h3>
+
+        <p>
+            Criminal procedure incorporates safeguards intended
+            to ensure proceedings are conducted according to law.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     RIGHTS
+===================================== -->
+
+<section style="margin-top:60px;">
+
+    <h2 class="section-title">
+        Important Legal Safeguards
+    </h2>
+
+    <p class="section-description">
+        General areas of protection relevant to criminal proceedings.
+    </p>
+
+
+    <div class="rights-grid">
+
+
+        <div class="right">
+
+            <h3>
+                Right to Legal Representation
+            </h3>
+
+            <p>
+                Legal systems provide mechanisms through which
+                accused persons may obtain legal representation,
+                subject to applicable law.
+            </p>
+
+        </div>
+
+
+        <div class="right">
+
+            <h3>
+                Protection against Arbitrary Action
+            </h3>
+
+            <p>
+                Constitutional and statutory safeguards regulate
+                the exercise of powers such as arrest and detention.
+            </p>
+
+        </div>
+
+
+        <div class="right">
+
+            <h3>
+                Right to Fair Procedure
+            </h3>
+
+            <p>
+                Criminal proceedings are governed by procedural
+                requirements intended to protect due process.
+            </p>
+
+        </div>
+
+
+        <div class="right">
+
+            <h3>
+                Right to Appeal
+            </h3>
+
+            <p>
+                Applicable criminal procedure may provide
+                mechanisms for challenging certain decisions
+                before higher courts.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     LEGAL INFORMATION
+===================================== -->
+
+<section>
+
+    <h2 class="section-title">
+        Criminal Law Resources
+    </h2>
+
+    <p class="section-description">
+        Suggested areas for your LexVoice legal-information database.
+    </p>
+
+
+    <div class="card-grid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📖
+            </div>
+
+            <h3>
+                Criminal Statutes
+            </h3>
+
+            <p>
+                Store searchable information about applicable
+                criminal statutes and provisions.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚖️
+            </div>
+
+            <h3>
+                Case Law
+            </h3>
+
+            <p>
+                Provide summaries and references to relevant
+                judicial decisions.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🌐
+            </div>
+
+            <h3>
+                Regional Languages
+            </h3>
+
+            <p>
+                Make criminal-law information available through
+                the multilingual interface of LexVoice.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     NOTICE
+===================================== -->
+
+<div class="notice">
+
+    <strong>
+        Legal Information Notice:
+    </strong>
+
+    This page is provided for educational and informational
+    purposes. Criminal law and procedure can depend on the
+    specific facts, applicable legislation, amendments and
+    judicial decisions. Users should consult a qualified
+    legal professional for advice concerning a specific case.
+
+</div>
+
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        ⚖ LexVoice
+    </div>
+
+    <p>
+        Multilingual Legal Information Platform
+    </p>
+
+    <p>
+        © 2026 LexVoice. All rights reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+/* =====================================
+   SEARCH FUNCTION
+===================================== */
+
+function searchContent(){
+
+    let input =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    /* Search Cards */
+
+    let cards =
+        document.querySelectorAll(".card");
+
+
+    cards.forEach(function(card){
+
+        let text =
+            card.innerText.toLowerCase();
+
+
+        if(text.includes(input)){
+
+            card.style.display = "block";
+
+        }
+        else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    /* Search Table */
+
+    let rows =
+        document.querySelectorAll(
+            "#offenceTable tbody tr"
+        );
+
+
+    rows.forEach(function(row){
+
+        let text =
+            row.innerText.toLowerCase();
+
+
+        if(text.includes(input)){
+
+            row.style.display = "";
+
+        }
+        else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================
+   PAGE LOAD MESSAGE
+===================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        console.log(
+            "LexVoice Criminal Law page loaded successfully."
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

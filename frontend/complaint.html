@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complaints | LexVoice</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+    --bg: #071A1F;
+    --panel: #102F35;
+    --panel-dark: #0B252A;
+    --gold: #D7B56D;
+    --text: #E8F1F2;
+    --muted: #9DB4B8;
+    --border: #24494F;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 5%, rgba(215,181,109,.08), transparent 30%),
+        radial-gradient(circle at 90% 45%, rgba(35,110,105,.12), transparent 35%),
+        var(--bg);
+    color: var(--text);
+}
+
+/* HEADER */
+
+header {
+    background: rgba(11,37,42,.96);
+    padding: 19px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #C7D8DA;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--gold);
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 65px 20px 35px;
+}
+
+.hero-tag {
+    display: inline-block;
+    color: var(--gold);
+    background: rgba(215,181,109,.08);
+    border: 1px solid rgba(215,181,109,.35);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(31px, 5vw, 45px);
+    margin-bottom: 14px;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+/* MAIN LAYOUT */
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px 24px 65px;
+}
+
+.section-title {
+    margin-bottom: 22px;
+}
+
+.section-title h2 {
+    color: var(--gold);
+    font-size: 23px;
+    margin-bottom: 7px;
+}
+
+.section-title p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* COMPLAINT FORM */
+
+.form-box {
+    background: linear-gradient(145deg, #12363C, #0B252A);
+    border: 1px solid #31555B;
+    border-radius: 19px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.18);
+}
+
+.form-icon {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(215,181,109,.1);
+    border: 1px solid rgba(215,181,109,.35);
+    border-radius: 15px;
+    color: var(--gold);
+    font-size: 27px;
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    color: #D4E0E1;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 23px;
+    background: #071A1F;
+    border: 1px solid #365960;
+    border-radius: 9px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: .3s;
+}
+
+select:focus,
+textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(215,181,109,.09);
+}
+
+select option {
+    background: #102F35;
+    color: white;
+}
+
+textarea {
+    min-height: 165px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+textarea::placeholder {
+    color: #829B9F;
+}
+
+.helper-text {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: -14px;
+    margin-bottom: 22px;
+}
+
+/* BUTTONS */
+
+button {
+    border: none;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background: var(--gold);
+    color: #071A1F;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+.submit-button:hover {
+    background: #E9CB8A;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#message {
+    margin-top: 17px;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* COMPLAINT HISTORY */
+
+.history-section {
+    margin-top: 55px;
+}
+
+.history-box {
+    background: linear-gradient(145deg, #102F35, #0B252A);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.history-header h2 {
+    color: var(--gold);
+    font-size: 22px;
+}
+
+.refresh-button {
+    padding: 10px 17px;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-size: 13px;
+}
+
+.refresh-button:hover {
+    background: rgba(215,181,109,.12);
+}
+
+#myComplaintMessage {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+/* COMPLAINT CARDS */
+
+.complaint-card {
+    background: #071A1F;
+    border: 1px solid #35585E;
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 18px;
+    transition: .3s;
+    animation: fadeIn .4s ease;
+}
+
+.complaint-card:hover {
+    border-color: rgba(215,181,109,.6);
+}
+
+.complaint-card h3 {
+    color: var(--gold);
+    font-size: 19px;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+.complaint-card p {
+    color: #C5D3D5;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 10px 0;
+    overflow-wrap: anywhere;
+}
+
+.complaint-status {
+    color: #8FE0A5 !important;
+    font-weight: 700;
+}
+
+.admin-solution {
+    color: var(--gold) !important;
+    background: rgba(215,181,109,.07);
+    border-left: 3px solid var(--gold);
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.delete-button {
+    margin-top: 16px;
+    padding: 11px 17px;
+    background: #A94343;
+    color: white;
+    font-size: 13px;
+}
+
+.delete-button:hover {
+    background: #C65353;
+}
+
+.empty-message {
+    padding: 35px 15px;
+    text-align: center;
+    color: var(--muted);
+    background: #071A1F;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    line-height: 1.8;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 25px;
+    padding: 27px 15px;
+    background: #06161A;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: #81979B;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 700px) {
+    header {
+        padding: 17px 5%;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 45px 18px 25px;
+    }
+
+    .container {
+        padding: 15px 16px 45px;
+    }
+
+    .form-box,
+    .history-box {
+        padding: 22px;
+    }
+
+    .history-header {
+        align-items: flex-start;
+    }
+
+    .refresh-button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚖ LEXVOICE</div>
+
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/laws.html">Laws</a>
+        <a href="/lawyers.html">Lawyers</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-tag">LEXVOICE LEGAL SUPPORT</div>
+
+    <h1>File a <span>Complaint</span></h1>
+
+    <p>
+        Submit your legal complaint securely through your LexVoice account.
+        Track its progress and view solutions provided by the administration.
+    </p>
+</section>
+
+<main class="container">
+
+    <section>
+        <div class="section-title">
+            <h2>Submit Your Complaint</h2>
+            <p>Provide the details of your issue below.</p>
+        </div>
+
+        <div class="form-box">
+
+            <div class="form-icon">⚖</div>
+
+            <form id="complaintForm">
+
+                <label for="category">Complaint Category</label>
+
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Property">Property</option>
+                    <option value="Consumer">Consumer</option>
+                    <option value="Family">Family</option>
+                    <option value="Cyber">Cyber</option>
+                    <option value="Criminal">Criminal</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="description">Complaint Description</label>
+
+                <textarea
+                    id="description"
+                    placeholder="Describe your complaint clearly. Include relevant details about the issue..."
+                    required
+                    minlength="10"
+                ></textarea>
+
+                <p class="helper-text">
+                    Please enter at least 10 characters.
+                </p>
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                    id="submitButton"
+                >
+                    SUBMIT COMPLAINT →
+                </button>
+
+                <p id="message" role="status" aria-live="polite"></p>
+
+            </form>
+        </div>
+    </section>
+
+    <section class="history-section">
+
+        <div class="history-box">
+
+            <div class="history-header">
+                <div>
+                    <h2>My Submitted Complaints</h2>
+                    <p style="color:#9DB4B8;font-size:13px;margin-top:7px;">
+                        Track your complaints and administration updates.
+                    </p>
+                </div>
+
+                <button
+                    class="refresh-button"
+                    type="button"
+                    id="refreshButton"
+                    onclick="loadMyComplaints()"
+                >
+                    ↻ Refresh
+                </button>
+            </div>
+
+            <p id="myComplaintMessage" role="status" aria-live="polite">
+                Loading your complaints...
+            </p>
+
+            <div id="myComplaintList"></div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 LexVoice | Multilingual Legal Assistant
+    <br>
+    Your legal support, made accessible.
+</footer>
+
+<script>
+const form = document.getElementById("complaintForm");
+const message = document.getElementById("message");
+const submitButton = document.getElementById("submitButton");
+const refreshButton = document.getElementById("refreshButton");
+
+
+// SUBMIT COMPLAINT
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const complaintData = {
+        subject: document.getElementById("category").value,
+        description: document.getElementById("description").value.trim()
+    };
+
+    if (!complaintData.subject || complaintData.description.length < 10) {
+        message.style.color = "#FF9999";
+        message.textContent =
+            "Please select a category and enter at least 10 characters.";
+        return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
+    message.textContent = "";
+
+    try {
+
+        const response = await fetch("/api/complaints", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(complaintData)
+        });
+
+        const data = await response.json();
+
+        if (response.status === 401) {
+            message.style.color = "#FF9999";
+            message.textContent =
+                "Please log in to submit a complaint.";
+            return;
+        }
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Complaint submission failed.");
+        }
+
+        message.style.color = "#8FE0A5";
+        message.textContent =
+            "Complaint submitted successfully! Your complaint ID is " +
+            data.complaint_id + ".";
+
+        form.reset();
+
+        await loadMyComplaints();
+
+    } catch (error) {
+
+        message.style.color = "#FF9999";
+        message.textContent = error.message;
+
+    } finally {
+
+        submitButton.disabled = false;
+        submitButton.textContent = "SUBMIT COMPLAINT →";
+
+    }
+
+});
+
+
+// DELETE USER COMPLAINT
+
+async function deleteComplaint(complaintId, button) {
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this complaint? This action cannot be undone."
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Deleting...";
+
+    try {
+
+        const response = await fetch(
+            "/api/my-complaints/" + encodeURIComponent(complaintId),
+            {
+                method: "DELETE",
+                credentials: "same-origin"
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.status === 401) {
+            throw new Error("Please log in again.");
+        }
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to delete complaint.");
+        }
+
+        await loadMyComplaints();
+
+    } catch (error) {
+
+        alert(error.message);
+
+        button.disabled = false;
+        button.textContent = "Delete Complaint";
+
+    }
+
+}
+
+
+// LOAD USER COMPLAINTS
+
+async function loadMyComplaints() {
+
+    const list = document.getElementById("myComplaintList");
+    const complaintMessage =
+        document.getElementById("myComplaintMessage");
+
+    list.replaceChildren();
+
+    complaintMessage.textContent = "Loading your complaints...";
+    refreshButton.disabled = true;
+    refreshButton.textContent = "Loading...";
+
+    try {
+
+        const response = await fetch("/api/my-complaints", {
+            credentials: "same-origin"
+        });
+
+        const data = await response.json();
+
+        if (response.status === 401) {
+            complaintMessage.textContent =
+                "Please log in to view your complaints.";
+            return;
+        }
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to load complaints.");
+        }
+
+        const complaints = data.complaints || [];
+
+        if (complaints.length === 0) {
+
+            const empty = document.createElement("div");
+            empty.className = "empty-message";
+            empty.textContent =
+                "⚖ You have not submitted any complaints yet.";
+
+            list.appendChild(empty);
+            complaintMessage.textContent = "No complaints found.";
+            return;
+        }
+
+        complaintMessage.textContent =
+            complaints.length + " complaint(s) found.";
+
+        complaints.forEach(item => {
+
+            const card = document.createElement("div");
+            card.className = "complaint-card";
+
+            const heading = document.createElement("h3");
+            heading.textContent = item.subject || "Complaint";
+
+            const description = document.createElement("p");
+            description.textContent =
+                "Description: " + (item.description || "Not provided");
+
+            const status = document.createElement("p");
+            status.className = "complaint-status";
+            status.textContent =
+                "Status: " + (item.status || "Pending");
+
+            const solution = document.createElement("p");
+            solution.className = "admin-solution";
+            solution.textContent =
+                "Admin Solution: " +
+                (item.solution || "Not yet provided.");
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "delete-button";
+            deleteButton.textContent = "Delete Complaint";
+
+            deleteButton.addEventListener("click", function() {
+                deleteComplaint(item.id, deleteButton);
+            });
+
+            card.append(
+                heading,
+                description,
+                status,
+                solution,
+                deleteButton
+            );
+
+            list.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        complaintMessage.textContent = error.message;
+
+    } finally {
+
+        refreshButton.disabled = false;
+        refreshButton.textContent = "↻ Refresh";
+
+    }
+
+}
+
+
+// LOAD COMPLAINTS WHEN PAGE OPENS
+
+document.addEventListener("DOMContentLoaded", loadMyComplaints);
+
+</script>
+
+</body>
+</html>

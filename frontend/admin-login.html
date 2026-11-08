@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Admin Login</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #071A1F;
+    color: #E8F1F2;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #102F35;
+    border: 1px solid #31555B;
+    border-radius: 18px;
+    padding: 38px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+}
+
+.logo {
+    text-align: center;
+    color: #D7B56D;
+    font-size: 29px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.shield {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    text-align: center;
+    color: #D7B56D;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #9DB4B8;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #C7D8DA;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 20px;
+    background: #071A1F;
+    border: 1px solid #35585E;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: #D7B56D;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #D7B56D;
+    color: #071A1F;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #E8C982;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.message {
+    display: none;
+    padding: 11px;
+    margin-bottom: 18px;
+    border-radius: 7px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.error {
+    background: #552C2C;
+    color: #FFBABA;
+}
+
+.success {
+    background: #1D464B;
+    color: #A8E6C1;
+}
+
+.back {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    color: #9DB4B8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back:hover {
+    color: #D7B56D;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #718C90;
+    font-size: 12px;
+}
+
+@media(max-width: 480px) {
+    .login-card {
+        padding: 27px 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+
+    <div class="logo">⚖ LexVoice</div>
+    <div class="shield">🛡️</div>
+
+    <h2>Administrator Login</h2>
+    <p class="subtitle">Secure access to the LexVoice administration panel</p>
+
+    <div id="errorMessage" class="message error"></div>
+    <div id="successMessage" class="message success"></div>
+
+    <form id="adminLoginForm">
+
+        <label for="username">Admin Username</label>
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter admin username"
+            autocomplete="username"
+            required
+        >
+
+        <label for="password">Password</label>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter admin password"
+            autocomplete="current-password"
+            required
+        >
+
+        <button type="submit" id="loginButton">
+            Login as Administrator
+        </button>
+
+    </form>
+
+    <a href="/login" class="back">← Back to User Login</a>
+
+    <div class="footer">
+        © 2026 LexVoice | Authorized Administrators Only
+    </div>
+
+</div>
+
+<script>
+const form = document.getElementById("adminLoginForm");
+const errorMessage = document.getElementById("errorMessage");
+const successMessage = document.getElementById("successMessage");
+const loginButton = document.getElementById("loginButton");
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    errorMessage.style.display = "none";
+    successMessage.style.display = "none";
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!username || !password) {
+        errorMessage.textContent = "Please enter your username and password.";
+        errorMessage.style.display = "block";
+        return;
+    }
+
+    loginButton.disabled = true;
+    loginButton.textContent = "Verifying...";
+
+    try {
+        const response = await fetch("/admin/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Invalid admin credentials.");
+        }
+
+        successMessage.textContent = data.message || "Login successful!";
+        successMessage.style.display = "block";
+
+        setTimeout(function() {
+            window.location.href = data.redirect || "/admin.html";
+        }, 800);
+
+    } catch (error) {
+        errorMessage.textContent = error.message || "Unable to connect to the server.";
+        errorMessage.style.display = "block";
+
+    } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = "Login as Administrator";
+    }
+});
+</script>
+
+</body>
+</html>

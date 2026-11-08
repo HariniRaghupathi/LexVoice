@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LexVoice | Laws</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+:root {
+    --bg: #071A1F;
+    --panel: #102F35;
+    --panel-dark: #0B252A;
+    --gold: #D7B56D;
+    --text: #E8F1F2;
+    --muted: #AFC3C6;
+    --border: #29494F;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    background: rgba(11,37,42,0.96);
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    color: #C7D8DA;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* HERO */
+
+.hero {
+    padding: 75px 8% 65px;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 50% 0%, #1A4142, transparent 65%),
+        linear-gradient(180deg, #0B252A, #071A1F);
+    border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 55px);
+    margin: 15px 0;
+    letter-spacing: 1px;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.intro {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* MAIN CONTAINER */
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 55px 25px 80px;
+}
+
+/* SEARCH */
+
+.search-area {
+    max-width: 720px;
+    margin: 0 auto 55px;
+    position: relative;
+}
+
+.search-area input {
+    width: 100%;
+    padding: 19px 22px 19px 55px;
+    background: var(--panel);
+    border: 1px solid #365960;
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-area input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(215,181,109,0.10);
+}
+
+.search-area input::placeholder {
+    color: #91A9AD;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 20px;
+}
+
+/* SECTION HEADING */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.section-heading h2 {
+    font-size: 23px;
+    color: var(--text);
+}
+
+.section-heading h2 span {
+    color: var(--gold);
+}
+
+.count {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* LAW CARDS */
+
+.law-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 23px;
+}
+
+.law-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #14383D, #0D292E);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 28px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.35s ease;
+}
+
+.law-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 3px;
+    width: 45px;
+    background: var(--gold);
+    transition: 0.35s;
+}
+
+.law-card::after {
+    content: "";
+    position: absolute;
+    right: -65px;
+    bottom: -85px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgba(215,181,109,0.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.law-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.law-card:hover::before {
+    width: 100%;
+}
+
+.card-number {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.law-card h2 {
+    color: var(--gold);
+    font-size: 21px;
+    margin-bottom: 12px;
+    font-weight: 650;
+}
+
+.law-card p {
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 14px;
+    flex: 1;
+}
+
+.law-card button {
+    margin-top: 23px;
+    padding: 11px 19px;
+    width: fit-content;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.law-card button:hover {
+    background: var(--gold);
+    color: #071A1F;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+    color: var(--muted);
+    padding: 45px 15px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 27px 15px;
+    background: #06161A;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: #81979B;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 950px) {
+    .law-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 650px) {
+    header {
+        flex-direction: column;
+        gap: 17px;
+    }
+
+    nav {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 55px 6%;
+    }
+
+    .container {
+        padding: 40px 18px 65px;
+    }
+
+    .law-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .law-card {
+        min-height: 215px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">LEXVOICE</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="lawyers.html">Lawyers</a>
+        <a href="complaint.html">Complaint</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="eyebrow">Knowledge • Rights • Justice</div>
+    <h1>Legal <span>Library</span></h1>
+    <p class="intro">
+        Explore different categories of Indian legal information.
+    </p>
+</section>
+
+<div class="container">
+
+    <div class="search-area">
+        <span class="search-icon">⌕</span>
+        <input
+            type="text"
+            id="search"
+            placeholder="Search laws..."
+            onkeyup="searchLaws()"
+            aria-label="Search laws">
+    </div>
+
+    <div class="section-heading">
+        <h2>Explore <span>Law Categories</span></h2>
+        <span class="count" id="resultCount">9 categories</span>
+    </div>
+
+    <div class="law-grid" id="lawGrid">
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 01</div>
+            <h2>Constitutional Law</h2>
+            <p>
+                Fundamental rights, constitutional provisions,
+                duties and structure of government.
+            </p>
+            <button onclick="window.location.href='Constitutional Law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 02</div>
+            <h2>Criminal Law</h2>
+            <p>
+                Information related to criminal offences,
+                procedures and legal provisions.
+            </p>
+            <button onclick="window.location.href='criminal law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 03</div>
+            <h2>Civil Law</h2>
+            <p>
+                Legal information relating to civil disputes,
+                contracts, property and related matters.
+            </p>
+            <button onclick="window.location.href='civil law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 04</div>
+            <h2>Family Law</h2>
+            <p>
+                Information concerning marriage, divorce,
+                maintenance and family-related matters.
+            </p>
+            <button onclick="window.location.href='family law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 05</div>
+            <h2>Consumer Law</h2>
+            <p>
+                Information about consumer rights,
+                complaints and consumer protection.
+            </p>
+            <button onclick="window.location.href='consumer law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 06</div>
+            <h2>Cyber Law</h2>
+            <p>
+                Information concerning online activities,
+                digital offences and cyber-related laws.
+            </p>
+            <button onclick="window.location.href='cyber law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 07</div>
+            <h2>Fundamental Rights</h2>
+            <p>
+                Discover constitutional rights and
+                fundamental freedoms.
+            </p>
+            <button onclick="window.location.href='fundamental law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 08</div>
+            <h2>Women law</h2>
+            <p>
+                Explore legal protections and rights related
+                to women and personal safety.
+            </p>
+            <button onclick="window.location.href='women law.html'">
+                Explore →
+            </button>
+        </div>
+
+        <div class="law-card">
+            <div class="card-number">CATEGORY 09</div>
+            <h2>Labour Rights</h2>
+            <p>
+                Understand employee rights, workplace
+                protections and labour regulations.
+            </p>
+            <button onclick="window.location.href='labour law.html'">
+                Explore →
+            </button>
+        </div>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+        No matching law categories found. Try another search.
+    </div>
+
+</div>
+
+<footer>
+    © 2026 LexVoice | Legal Information Portal
+</footer>
+
+<script>
+function openLaw(name) {
+    alert("Opening " + name + " section.");
+}
+
+function searchLaws() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.querySelectorAll(".law-card");
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+        let matches = text.includes(input);
+
+        card.style.display = matches ? "flex" : "none";
+
+        if (matches) {
+            visibleCount++;
+        }
+    });
+
+    document.getElementById("resultCount").textContent =
+        visibleCount + (visibleCount === 1 ? " category" : " categories");
+
+    document.getElementById("noResults").style.display =
+        visibleCount === 0 ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Lawyer Contacts</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+    --bg: #071A1F;
+    --panel: #102F35;
+    --panel-dark: #0B252A;
+    --gold: #D7B56D;
+    --text: #E8F1F2;
+    --muted: #B8CCCC;
+    --border: #29494F;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 10% 15%, #153A3E, transparent 35%),
+        radial-gradient(ellipse at 90% 65%, #102F35, transparent 35%),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+/* HEADER */
+
+header {
+    background: rgba(11, 37, 42, 0.96);
+    backdrop-filter: blur(14px);
+    padding: 19px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.logo span {
+    margin-right: 8px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 85px 20px 75px;
+    background:
+        radial-gradient(ellipse at center, #1A4548, transparent 68%),
+        linear-gradient(180deg, #0B252A, #071A1F);
+    border-bottom: 1px solid var(--border);
+}
+
+.hero::before {
+    content: "LEGAL PROFESSIONAL DIRECTORY";
+    display: block;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 17px;
+}
+
+.hero h1 {
+    color: var(--text);
+    font-size: clamp(34px, 5vw, 53px);
+    margin-bottom: 15px;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: auto;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* SEARCH */
+
+.search-area {
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.search-area input {
+    width: 100%;
+    padding: 17px 20px;
+    background: var(--panel);
+    color: white;
+    border: 1px solid #365960;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.search-area input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(215,181,109,0.10);
+}
+
+.search-area input::placeholder {
+    color: #91A9AD;
+}
+
+/* LAWYER SECTION */
+
+.lawyer-section {
+    max-width: 1100px;
+    margin: 55px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    color: var(--gold);
+    font-size: 29px;
+    margin-bottom: 27px;
+    padding-left: 16px;
+    border-left: 4px solid var(--gold);
+}
+
+/* LAWYER CARDS */
+
+.lawyer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.lawyer-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #14383D, #0C282D);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 29px;
+    transition: 0.35s ease;
+}
+
+.lawyer-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: var(--gold);
+    transition: 0.35s;
+}
+
+.lawyer-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 17px 35px rgba(0,0,0,0.28);
+}
+
+.lawyer-card:hover::before {
+    width: 100%;
+}
+
+.lawyer-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #F0D58F, #C29A4D);
+    color: #071A1F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 29px;
+    margin-bottom: 19px;
+    box-shadow: 0 7px 18px rgba(215,181,109,0.15);
+}
+
+.lawyer-card h3 {
+    color: var(--text);
+    font-size: 21px;
+    margin-bottom: 9px;
+}
+
+.verified {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 12px;
+    margin-bottom: 17px;
+    padding: 5px 9px;
+    background: rgba(215,181,109,0.08);
+    border: 1px solid rgba(215,181,109,0.2);
+    border-radius: 5px;
+}
+
+.lawyer-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 9px 0;
+    overflow-wrap: anywhere;
+}
+
+.lawyer-card p strong {
+    color: #E8F1F2;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.copy-btn,
+.email-btn {
+    flex: 1;
+    min-width: 110px;
+    padding: 12px;
+    text-align: center;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.copy-btn {
+    background: var(--gold);
+    color: #071A1F;
+    border: none;
+    cursor: pointer;
+}
+
+.email-btn {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+}
+
+.copy-btn:hover {
+    background: #F0D58F;
+    transform: translateY(-2px);
+}
+
+.email-btn:hover {
+    background: var(--gold);
+    color: #071A1F;
+    transform: translateY(-2px);
+}
+
+/* DISCLAIMER */
+
+.disclaimer {
+    max-width: 1050px;
+    margin: 50px auto;
+    padding: 27px;
+    background: var(--panel-dark);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+}
+
+.disclaimer strong {
+    color: var(--gold);
+}
+
+/* DYNAMIC LAWYERS */
+
+#dynamic-senior-lawyers {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+#dynamic-senior-lawyers h2 {
+    color: var(--gold);
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+#senior-lawyer-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+#senior-lawyer-cards > div {
+    background: linear-gradient(145deg, #14383D, #0C282D);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px;
+    transition: 0.3s;
+}
+
+#senior-lawyer-cards > div:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+
+#senior-lawyer-cards h3 {
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+#senior-lawyer-cards p {
+    color: var(--muted);
+    margin: 7px 0;
+    overflow-wrap: anywhere;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 60px;
+    padding: 28px 15px;
+    text-align: center;
+    background: #06161A;
+    color: #82999C;
+    border-top: 1px solid var(--border);
+}
+
+/* MOBILE */
+
+@media(max-width: 750px) {
+    header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .lawyer-section {
+        margin: 40px auto;
+    }
+
+    .disclaimer {
+        margin: 35px 15px;
+        padding: 22px;
+    }
+}
+
+@media(max-width: 450px) {
+    .lawyer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .copy-btn,
+    .email-btn {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <div class="logo">
+        <span>⚖</span> LexVoice
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="laws.html">Laws</a>
+        <a href="complaint.html">Complaint</a>
+        <a href="junior-lawyers.html">Junior Lawyers</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+    <h1>Lawyer Contacts</h1>
+    <p>
+        Find lawyer contact information and explore
+        available legal professionals through LexVoice.
+    </p>
+</section>
+
+<!-- SEARCH -->
+
+<div class="search-area">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search lawyer name or location..."
+        oninput="searchLawyers()">
+</div>
+
+<!-- LAWYER DIRECTORY -->
+
+<section class="lawyer-section">
+
+    <h2 class="section-title">Lawyer Directory</h2>
+
+    <div class="lawyer-grid" id="lawyerGrid">
+
+        <!-- LAWYER 1 -->
+
+        <div class="lawyer-card" data-name="B V Acharya Bengaluru Jayamahal">
+
+            <div class="lawyer-icon">⚖</div>
+
+            <h3>Shri. B. V. Acharya</h3>
+
+            <span class="verified">Senior Advocate</span>
+
+            <p><strong>Location:</strong> Bengaluru</p>
+            <p><strong>Office:</strong> Jayamahal Extension, Bengaluru</p>
+            <p><strong>Phone:</strong> 080-23331588</p>
+            <p><strong>Mobile:</strong> 9448379540</p>
+            <p><strong>Email:</strong> bvacharya@gmail.com</p>
+
+            <div class="buttons">
+                <button class="copy-btn" onclick="copyNumber('9448379540', this)">📋 Copy Number</button>
+                <a class="email-btn" href="mailto:bvacharya@gmail.com">✉ Email</a>
+            </div>
+        </div>
+
+        <!-- LAWYER 2 -->
+
+        <div class="lawyer-card" data-name="Vijaya Shankar Bengaluru Sankey Road">
+
+            <div class="lawyer-icon">⚖</div>
+
+            <h3>Shri. Vijaya Shankar S.</h3>
+
+            <span class="verified">Senior Advocate</span>
+
+            <p><strong>Location:</strong> Bengaluru</p>
+            <p><strong>Office:</strong> Sankey Road Cross, Abshot Layout</p>
+            <p><strong>Office Phone:</strong> 080-22268276</p>
+            <p><strong>Mobile:</strong> 9845596216</p>
+            <p><strong>Email:</strong> vsalaw@yahoo.com</p>
+
+            <div class="buttons">
+                <button class="copy-btn" onclick="copyNumber('9845596216', this)">📋 Copy Number</button>
+                <a class="email-btn" href="mailto:vsalaw@yahoo.com">✉ Email</a>
+            </div>
+        </div>
+
+        <!-- LAWYER 3 -->
+
+        <div class="lawyer-card" data-name="G Sarangan Bengaluru Millers Road">
+
+            <div class="lawyer-icon">⚖</div>
+
+            <h3>Shri. G. Sarangan</h3>
+
+            <span class="verified">Senior Advocate</span>
+
+            <p><strong>Location:</strong> Bengaluru</p>
+            <p><strong>Office:</strong> Millers Road, Bengaluru</p>
+            <p><strong>Phone:</strong> 080-23537508</p>
+            <p><strong>Mobile:</strong> 9900137508</p>
+
+            <div class="buttons">
+                <button class="copy-btn" onclick="copyNumber('9900137508', this)">📋 Copy Number</button>
+            </div>
+        </div>
+
+        <!-- LAWYER 4 -->
+
+        <div class="lawyer-card" data-name="Pramila Nesargi Bengaluru Indiranagar">
+
+            <div class="lawyer-icon">⚖</div>
+
+            <h3>Smt. Pramila Nesargi</h3>
+
+            <span class="verified">Senior Advocate</span>
+
+            <p><strong>Location:</strong> Indiranagar, Bengaluru</p>
+            <p><strong>Office Phone:</strong> 080-41997900</p>
+            <p><strong>Mobile:</strong> 9886130055</p>
+            <p><strong>Email:</strong> pramilaassociates007@gmail.com</p>
+
+            <div class="buttons">
+                <button class="copy-btn" onclick="copyNumber('9886130055', this)">📋 Copy Number</button>
+                <a class="email-btn" href="mailto:pramilaassociates007@gmail.com">✉ Email</a>
+            </div>
+        </div>
+
+        <!-- LAWYER 5 -->
+
+        <div class="lawyer-card" data-name="H Subramanya Jois Bengaluru Shankar Park">
+
+            <div class="lawyer-icon">⚖</div>
+
+            <h3>Shri. H. Subramanya Jois</h3>
+
+            <span class="verified">Senior Advocate</span>
+
+            <p><strong>Location:</strong> Shankar Park, Bengaluru</p>
+            <p><strong>Phone:</strong> 080-26602539</p>
+            <p><strong>Mobile:</strong> 9448278209</p>
+
+            <div class="buttons">
+                <button class="copy-btn" onclick="copyNumber('9448278209', this)">📋 Copy Number</button>
+            </div>
+        </div>
+
+        <!-- LAWYER 6 -->
+
+        <div class="lawyer-card" data-name="Arun Kumar Bengaluru Dooravani Nagar">
+
+            <div class="lawyer-icon">⚖</div>
+
+            <h3>Shri. Arun Kumar K.</h3>
+
+            <span class="verified">Senior Advocate</span>
+
+            <p><strong>Location:</strong> Dooravani Nagar, Bengaluru</p>
+            <p><strong>Office Phone:</strong> 080-41473535</p>
+            <p><strong>Mobile:</strong> 9845326500</p>
+            <p><strong>Email:</strong> arun@crestlawpartners.com</p>
+
+            <div class="buttons">
+                <button class="copy-btn" onclick="copyNumber('9845326500', this)">📋 Copy Number</button>
+                <a class="email-btn" href="mailto:arun@crestlawpartners.com">✉ Email</a>
+            </div>
+        </div>
+
+    </div>
+
+    <p id="noResults" style="display:none; color:#B8CCCC; text-align:center; margin-top:25px;">
+        No lawyers found matching your search.
+    </p>
+
+</section>
+
+<!-- DISCLAIMER -->
+
+<div class="disclaimer">
+
+    <strong>Important:</strong>
+
+    The lawyer contact details displayed on LexVoice are
+    provided for informational purposes only.
+
+    <br><br>
+
+    LexVoice does not guarantee the accuracy, availability,
+    or current status of any listed advocate. Please verify
+    the details independently before making an appointment.
+
+    <br><br>
+
+    LexVoice does not claim affiliation with any listed lawyer.
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+    <p>
+        © 2026 LexVoice |
+        Multilingual Legal Information Portal
+    </p>
+</footer>
+
+<!-- COPY NUMBER AND SEARCH JAVASCRIPT -->
+
+<script>
+
+async function copyNumber(number, button) {
+
+    try {
+
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(number);
+        } else {
+            const textArea = document.createElement("textarea");
+            textArea.value = number;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+
+            document.body.appendChild(textArea);
+            textArea.select();
+
+            const copied = document.execCommand("copy");
+            textArea.remove();
+
+            if (!copied) {
+                throw new Error("Copy failed");
+            }
+        }
+
+        const originalText = button.innerHTML;
+
+        button.innerHTML = "✓ Copied!";
+
+        button.disabled = true;
+
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }, 1500);
+
+    } catch (error) {
+
+        alert("Unable to copy. Please copy this number manually: " + number);
+
+    }
+}
+
+
+/* SEARCH LAWYERS */
+
+function searchLawyers() {
+
+    const search = document
+        .getElementById("searchInput")
+        .value.trim()
+        .toLowerCase();
+
+    const cards = document.querySelectorAll(".lawyer-card");
+
+    let visibleCount = 0;
+
+    cards.forEach(function(card) {
+
+        const searchableText = (
+            card.innerText + " " +
+            (card.getAttribute("data-name") || "")
+        ).toLowerCase();
+
+        const matches = searchableText.includes(search);
+
+        card.style.display = matches ? "block" : "none";
+
+        if (matches) {
+            visibleCount++;
+        }
+
+    });
+
+    document.getElementById("noResults").style.display =
+        visibleCount === 0 ? "block" : "none";
+
+}
+
+
+/* LOAD ADDITIONAL SENIOR LAWYERS */
+
+async function loadSeniorLawyers() {
+
+    try {
+
+        const response = await fetch("/api/lawyers");
+
+        if (!response.ok) {
+            throw new Error("Unable to connect to the lawyer service.");
+        }
+
+        const data = await response.json();
+
+        if (!data.success) {
+            console.error("Unable to load senior lawyers:", data.message);
+            return;
+        }
+
+        const lawyers = data.lawyers || [];
+
+        if (lawyers.length === 0) {
+            return;
+        }
+
+        let section = document.getElementById("dynamic-senior-lawyers");
+
+        if (!section) {
+
+            section = document.createElement("section");
+            section.id = "dynamic-senior-lawyers";
+
+            const heading = document.createElement("h2");
+            heading.textContent = "Additional Senior Lawyers";
+
+            const container = document.createElement("div");
+            container.id = "senior-lawyer-cards";
+
+            section.appendChild(heading);
+            section.appendChild(container);
+
+            const disclaimer = document.querySelector(".disclaimer");
+
+            document.body.insertBefore(section, disclaimer);
+
+        }
+
+        const container = document.getElementById("senior-lawyer-cards");
+
+        container.innerHTML = "";
+
+        lawyers.forEach(lawyer => {
+
+            const card = document.createElement("div");
+
+            const name = document.createElement("h3");
+            name.textContent = lawyer.name || "Name not provided";
+
+            const specialization = document.createElement("p");
+            specialization.textContent =
+                "Specialization: " + (lawyer.specialization || "Not provided");
+
+            const phone = document.createElement("p");
+            phone.textContent =
+                "Phone: " + (lawyer.phone || "Not provided");
+
+            const email = document.createElement("p");
+            email.textContent =
+                "Email: " + (lawyer.email || "Not provided");
+
+            const experience = document.createElement("p");
+            experience.textContent =
+                "Experience: " +
+                (lawyer.experience ?? "Not provided") +
+                (lawyer.experience != null ? " years" : "");
+
+            card.append(name, specialization, phone, email, experience);
+
+            container.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error("Senior lawyer loading error:", error);
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", loadSeniorLawyers);
+
+</script>
+
+</body>
+</html>

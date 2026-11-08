@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Multilingual Legal Assistant</title>
+
+<style>
+:root {
+    --navy: #071A1F;
+    --teal: #102F35;
+    --olive: #788653;
+    --gold: #D7B56D;
+    --ice: #E8F1F2;
+    --muted: #B7CBCD;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--ice);
+    background:
+        radial-gradient(ellipse at 15% 40%, rgba(120,134,83,0.25), transparent 45%),
+        radial-gradient(ellipse at 85% 10%, rgba(215,181,109,0.12), transparent 35%),
+        linear-gradient(135deg, #071A1F, #102F35 55%, #293B32);
+    overflow-x: hidden;
+}
+
+.page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 5% 35px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* GOLDEN FLORAL LINE DECORATION */
+.page::before {
+    content: "";
+    position: absolute;
+    left: -95px;
+    top: 125px;
+    width: 480px;
+    height: 570px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.38;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 570' fill='none' stroke='%23D7B56D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-20 550 C100 470 20 350 145 280 C250 220 285 130 190 20'/%3E%3Cpath d='M20 570 C135 475 75 370 175 300 C290 220 335 130 245 0'/%3E%3Cpath d='M145 280 C85 255 65 205 105 170 C145 205 160 245 145 280Z'/%3E%3Cpath d='M145 280 C195 245 210 195 175 160 C140 205 130 245 145 280Z'/%3E%3Cpath d='M145 280 C95 310 50 290 45 245 C95 245 125 255 145 280Z'/%3E%3Cpath d='M145 280 C195 310 240 290 245 245 C195 245 165 255 145 280Z'/%3E%3Ccircle cx='145' cy='280' r='10'/%3E%3Cpath d='M240 170 C185 145 185 95 220 70 C250 110 255 145 240 170Z'/%3E%3Cpath d='M240 170 C285 135 330 150 340 190 C295 200 260 190 240 170Z'/%3E%3Cpath d='M240 170 C205 210 215 250 255 265 C270 220 260 185 240 170Z'/%3E%3Ccircle cx='240' cy='170' r='8'/%3E%3Cpath d='M65 420 C15 390 15 345 50 320 C85 365 85 395 65 420Z'/%3E%3Cpath d='M65 420 C110 385 150 400 165 440 C120 455 85 445 65 420Z'/%3E%3Ccircle cx='65' cy='420' r='8'/%3E%3Cpath d='M300 350 C255 320 260 275 295 250 C325 290 325 325 300 350Z'/%3E%3Cpath d='M300 350 C345 315 390 330 400 370 C355 385 320 370 300 350Z'/%3E%3Ccircle cx='300' cy='350' r='8'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* HEADER */
+header {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-symbol {
+    font-size: 35px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--ice);
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    min-height: 390px;
+    padding-top: 55px;
+}
+
+.hero-content {
+    width: 52%;
+    max-width: 620px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 65px);
+    line-height: 1.12;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 28px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+.btn-primary:hover {
+    background: #ebd29a;
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.btn-outline:hover {
+    background: rgba(215,181,109,0.12);
+    transform: translateY(-3px);
+}
+
+/* LADY JUSTICE IMAGE */
+.art {
+    position: absolute;
+    right: 0;
+    top: 65px;
+    bottom: 100px;
+    width: 55%;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.art img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: right bottom;
+    transform: translateY(-45px);
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+}
+
+/* FEATURE CARDS */
+.cards {
+    position: relative;
+    z-index: 4;
+    margin-top: auto;
+    padding-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: rgba(7, 26, 31, 0.78);
+    border: 1px solid rgba(215,181,109,0.35);
+    border-radius: 13px;
+    padding: 23px;
+    text-decoration: none;
+    color: var(--ice);
+    backdrop-filter: blur(8px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    border-color: var(--gold);
+    background: rgba(16,47,53,0.95);
+}
+
+.card-icon {
+    font-size: 27px;
+    margin-bottom: 13px;
+}
+
+.card h3 {
+    color: var(--gold);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+footer {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    padding-top: 25px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 820px) {
+    .page {
+        padding: 22px 5%;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    nav {
+        gap: 16px;
+    }
+
+    .hero {
+        min-height: 450px;
+        padding-top: 55px;
+    }
+
+    .hero-content {
+        width: 65%;
+    }
+
+    .art {
+        width: 52%;
+        opacity: 0.65;
+        top: 100px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .logo {
+        font-size: 23px;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 470px;
+        align-items: flex-start;
+        padding-top: 45px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        max-width: 100%;
+    }
+
+    .art {
+        width: 75%;
+        top: 190px;
+        bottom: 100px;
+        opacity: 0.28;
+    }
+
+    .page::before {
+        width: 350px;
+        height: 450px;
+        left: -120px;
+        top: 170px;
+        opacity: 0.3;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        padding-top: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+        <div class="logo">
+            <span class="logo-symbol">⚖</span>
+            <span>LEXVOICE</span>
+        </div>
+
+        <nav>
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <div class="art">
+        <img
+           src="lexvoice-hero.png"
+            alt="Lady Justice statue holding the scales of justice"
+            onerror="this.style.display='none'"
+        >
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">Justice • Rights • Awareness</div>
+
+            <h1>
+                Know Your Rights.<br>
+                <span>Find Your Voice.</span>
+            </h1>
+
+            <p>
+                Access legal information, understand your rights,
+                explore Indian laws and connect with legal professionals
+                through one multilingual platform.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="laws.html" class="btn btn-primary">
+                    Explore Laws
+                </a>
+
+                <a href="register.html" class="btn btn-outline">
+                    Create Account
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cards">
+
+        <a href="laws.html" class="card">
+            <div class="card-icon">⚖</div>
+            <h3>Legal Information</h3>
+            <p>
+                Explore different laws and learn about your
+                fundamental rights and legal protections.
+            </p>
+        </a>
+
+        </a>
+
+        <a href="lawyers.html" class="card">
+            <div class="card-icon">👨‍⚖️</div>
+            <h3>Lawyer Connection</h3>
+            <p>
+                Find legal professionals and explore options
+                for getting legal assistance.
+            </p>
+        </a>
+
+    </section>
+
+    <footer>
+        © 2026 LexVoice. All Rights Reserved.
+        | Multilingual Legal Assistant
+    </footer>
+
+</div>
+
+</body>
+</html>

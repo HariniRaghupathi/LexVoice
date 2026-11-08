@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | My Profile</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #071A1F;
+    color: #E8F1F2;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    background: #0B252A;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #D7B56D;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #D7B56D;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #C7D8DA;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: #D7B56D;
+}
+
+/* Main content */
+.container {
+    max-width: 750px;
+    margin: auto;
+    padding: 55px 25px;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #D7B56D;
+    margin-bottom: 12px;
+    font-size: 32px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #9DB4B8;
+    margin-bottom: 35px;
+}
+
+/* Gavel decoration */
+.gavel-decoration {
+    position: fixed;
+    width: 220px;
+    height: 220px;
+    color: #D7B56D;
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gavel-left {
+    top: 110px;
+    left: 10px;
+    transform: rotate(-15deg);
+}
+
+.gavel-right {
+    bottom: 20px;
+    right: 10px;
+    transform: rotate(25deg);
+}
+
+/* Profile card */
+.profile-card {
+    background: rgba(16, 47, 53, 0.97);
+    border: 1px solid #D7B56D;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.card-heading {
+    text-align: center;
+    color: #D7B56D;
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+/* Avatar */
+.avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(145deg, #E6C983, #B78C3F);
+    color: #071A1F;
+    border: 3px solid #F0D99D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0 auto 18px;
+    box-shadow: 0 0 25px rgba(215, 181, 109, 0.2);
+}
+
+.profile-name {
+    text-align: center;
+    color: #D7B56D;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.profile-email {
+    text-align: center;
+    color: #9DB4B8;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Form */
+.form-divider {
+    height: 1px;
+    background: #35585E;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #D7B56D;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 20px;
+    background: #071A1F;
+    border: 1px solid #35585E;
+    border-radius: 7px;
+    color: #E8F1F2;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #D7B56D;
+    box-shadow: 0 0 0 2px rgba(215, 181, 109, 0.15);
+}
+
+input:disabled, select:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Buttons */
+button {
+    padding: 13px 22px;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.edit-btn, .save-btn {
+    background: #D7B56D;
+    color: #071A1F;
+}
+
+.edit-btn:hover, .save-btn:hover {
+    background: #E6C983;
+}
+
+.cancel-btn {
+    background: transparent;
+    border: 1px solid #D7B56D;
+    color: #D7B56D;
+}
+
+.cancel-btn:hover {
+    background: rgba(215, 181, 109, 0.1);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#message {
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    padding: 25px;
+    background: #06161A;
+    border-top: 1px solid #29494F;
+    text-align: center;
+    color: #81979B;
+}
+
+/* Mobile */
+@media(max-width: 700px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .container {
+        padding: 40px 18px;
+    }
+
+    .profile-card {
+        padding: 23px;
+    }
+
+    .gavel-decoration {
+        width: 110px;
+        height: 110px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Golden judge's gavel - left -->
+<svg class="gavel-decoration gavel-left"
+     viewBox="0 0 200 200"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="5"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <g transform="rotate(-35 100 100)">
+        <rect x="76" y="25" width="48" height="38" rx="8"/>
+        <path d="M100 63 V145"/>
+        <path d="M76 145 H124"/>
+        <path d="M65 155 H135"/>
+        <path d="M72 25 H128"/>
+        <path d="M80 63 L120 63"/>
+    </g>
+</svg>
+
+<!-- Golden judge's gavel - right -->
+<svg class="gavel-decoration gavel-right"
+     viewBox="0 0 200 200"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="5"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <g transform="rotate(35 100 100)">
+        <rect x="76" y="25" width="48" height="38" rx="8"/>
+        <path d="M100 63 V145"/>
+        <path d="M76 145 H124"/>
+        <path d="M65 155 H135"/>
+        <path d="M72 25 H128"/>
+        <path d="M80 63 L120 63"/>
+    </g>
+</svg>
+
+<header>
+    <div class="logo">⚖ LexVoice</div>
+
+    <nav>
+        <a href="/dashboard.html">Dashboard</a>
+
+    </nav>
+</header>
+
+<main class="container">
+
+    <h1>My Profile</h1>
+
+    <p class="subtitle">
+        Your identity and account information in LexVoice.
+    </p>
+
+    <div class="profile-card">
+
+        <div class="card-heading">ACCOUNT INFORMATION</div>
+
+        <div class="avatar" id="avatar">U</div>
+
+        <h2 class="profile-name" id="displayName">Loading...</h2>
+        <p class="profile-email" id="displayEmail"></p>
+
+        <div class="form-divider"></div>
+
+        <form id="profileForm">
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" disabled required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" disabled>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" disabled
+                   placeholder="Enter your phone number">
+
+            <label for="language">Preferred Language</label>
+            <select id="language" disabled>
+                <option value="English">English</option>
+                <option value="Kannada">Kannada</option>
+            </select>
+
+            <div class="buttons">
+
+                <button type="button"
+                        class="edit-btn"
+                        id="editButton">
+                    EDIT PROFILE
+                </button>
+
+                <button type="submit"
+                        class="save-btn"
+                        id="saveButton"
+                        hidden>
+                    SAVE CHANGES
+                </button>
+
+                <button type="button"
+                        class="cancel-btn"
+                        id="cancelButton"
+                        hidden>
+                    CANCEL
+                </button>
+
+            </div>
+
+            <p id="message"></p>
+
+        </form>
+    </div>
+</main>
+
+<footer>
+    © 2026 LexVoice | Multilingual Legal Assistant
+</footer>
+
+<script>
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
+const languageInput = document.getElementById("language");
+
+const editButton = document.getElementById("editButton");
+const saveButton = document.getElementById("saveButton");
+const cancelButton = document.getElementById("cancelButton");
+const message = document.getElementById("message");
+
+let originalData = {};
+
+async function loadProfile() {
+    try {
+        const response = await fetch("/api/profile", {
+            credentials: "same-origin",
+            cache: "no-store"
+        });
+
+        const data = await response.json();
+
+        if (response.status === 401) {
+            window.location.href = "/login";
+            return;
+        }
+
+        if (!response.ok || data.success === false) {
+            throw new Error(
+                data.message || "Unable to load profile."
+            );
+        }
+
+        const user = data.user || data.profile || data;
+
+        nameInput.value = user.name || "";
+        emailInput.value = user.email || "";
+        phoneInput.value = user.phone || "";
+
+        languageInput.value =
+            user.language === "Kannada" ? "Kannada" : "English";
+
+        originalData = {
+            name: nameInput.value,
+            email: emailInput.value,
+            phone: phoneInput.value,
+            language: languageInput.value
+        };
+
+        updateDisplay();
+
+    } catch (error) {
+        message.style.color = "#FF9999";
+        message.textContent = error.message;
+
+        console.error("Profile loading error:", error);
+    }
+}
+
+function updateDisplay() {
+    document.getElementById("displayName").textContent =
+        nameInput.value || "User";
+
+    document.getElementById("displayEmail").textContent =
+        emailInput.value;
+
+    document.getElementById("avatar").textContent =
+        (nameInput.value.trim().charAt(0) || "U").toUpperCase();
+}
+
+function enableEditing(enabled) {
+    nameInput.disabled = !enabled;
+    phoneInput.disabled = !enabled;
+    languageInput.disabled = !enabled;
+
+    emailInput.disabled = true;
+
+    editButton.hidden = enabled;
+    saveButton.hidden = !enabled;
+    cancelButton.hidden = !enabled;
+}
+
+editButton.addEventListener("click", function() {
+    enableEditing(true);
+    message.textContent = "";
+});
+
+cancelButton.addEventListener("click", function() {
+    nameInput.value = originalData.name;
+    emailInput.value = originalData.email;
+    phoneInput.value = originalData.phone;
+    languageInput.value = originalData.language;
+
+    enableEditing(false);
+    updateDisplay();
+
+    message.textContent = "";
+});
+
+document.getElementById("profileForm").addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        if (!nameInput.value.trim()) {
+            message.style.color = "#FF9999";
+            message.textContent = "Please enter your name.";
+            return;
+        }
+
+        saveButton.disabled = true;
+        saveButton.textContent = "SAVING...";
+
+        const updatedData = {
+            name: nameInput.value.trim(),
+            phone: phoneInput.value.trim(),
+            language: languageInput.value
+        };
+
+        try {
+            const response = await fetch("/api/profile/update", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "same-origin",
+                body: JSON.stringify(updatedData)
+            });
+
+            const data = await response.json();
+
+            if (response.status === 401) {
+                window.location.href = "/login";
+                return;
+            }
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || "Profile update failed."
+                );
+            }
+
+            originalData = {
+                name: updatedData.name,
+                email: emailInput.value,
+                phone: updatedData.phone,
+                language: updatedData.language
+            };
+
+            enableEditing(false);
+            updateDisplay();
+
+            message.style.color = "#8FE0A5";
+            message.textContent =
+                "Profile updated successfully!";
+
+        } catch (error) {
+            message.style.color = "#FF9999";
+            message.textContent = error.message;
+
+        } finally {
+            saveButton.disabled = false;
+            saveButton.textContent = "SAVE CHANGES";
+        }
+    }
+);
+
+loadProfile();
+</script>
+
+</body>
+</html>

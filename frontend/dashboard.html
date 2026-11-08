@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | User Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+:root {
+    --bg: #071A1F;
+    --panel: #0B252A;
+    --card: #102F35;
+    --gold: #D7B56D;
+    --text: #E8F1F2;
+    --muted: #9DB4B8;
+    --border: #24494F;
+}
+
+body {
+    background:
+        radial-gradient(circle at 85% 5%, #153A40 0, transparent 28%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HEADER */
+header {
+    height: 76px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(11,37,42,0.95);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.logo span {
+    color: var(--text);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.logout {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 21px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    background: var(--gold);
+    color: var(--bg);
+}
+
+/* MAIN */
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 45px 28px 60px;
+}
+
+/* WELCOME */
+.welcome {
+    position: relative;
+    overflow: hidden;
+    padding: 43px;
+    border: 1px solid #35585E;
+    border-radius: 20px;
+    background:
+        linear-gradient(110deg, #102F35, #0B252A 70%);
+    margin-bottom: 42px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.18);
+}
+
+.welcome::after {
+    content: "⚖";
+    position: absolute;
+    right: 65px;
+    top: 5px;
+    font-size: 145px;
+    color: rgba(215,181,109,0.08);
+    pointer-events: none;
+}
+
+.welcome-tag {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+
+.welcome h1 {
+    font-size: clamp(27px, 4vw, 38px);
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.welcome h1 span {
+    color: var(--gold);
+}
+
+.welcome p {
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 550px;
+}
+
+.welcome-line {
+    width: 55px;
+    height: 3px;
+    background: var(--gold);
+    margin-top: 23px;
+    border-radius: 5px;
+}
+
+/* SECTION */
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 22px;
+    gap: 15px;
+}
+
+.section-heading h2 {
+    color: var(--gold);
+    font-size: 23px;
+    margin-bottom: 6px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* CARDS */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    position: relative;
+    display: block;
+    min-height: 190px;
+    padding: 25px;
+    background: linear-gradient(145deg, #102F35, #0B252A);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    text-decoration: none;
+    color: var(--text);
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: -45px;
+    bottom: -50px;
+    border: 1px solid rgba(215,181,109,0.13);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.card:hover::after {
+    transform: scale(1.6);
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(215,181,109,0.11);
+    border: 1px solid rgba(215,181,109,0.25);
+    font-size: 23px;
+    margin-bottom: 19px;
+}
+
+.card h3 {
+    color: var(--gold);
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.card-arrow {
+    position: absolute;
+    right: 23px;
+    top: 29px;
+    color: var(--gold);
+    font-size: 18px;
+    opacity: 0.65;
+}
+
+/* MESSAGE */
+#pageMessage {
+    color: #FF9999;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+    border-top: 1px solid var(--border);
+    background: #06161A;
+    padding: 25px;
+    text-align: center;
+    color: #81979B;
+    font-size: 12px;
+}
+
+footer span {
+    color: var(--gold);
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    header {
+        padding: 0 5%;
+        height: 68px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .user-label {
+        display: none;
+    }
+
+    .container {
+        padding: 28px 17px 45px;
+    }
+
+    .welcome {
+        padding: 29px 23px;
+    }
+
+    .welcome::after {
+        right: 10px;
+        font-size: 100px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 165px;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚖ Lex<span>Voice</span></div>
+
+    <div class="header-right">
+        <span class="user-label">USER PORTAL</span>
+        <button class="logout" onclick="logout()">Logout ↗</button>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="welcome">
+        <div class="welcome-tag">Personal Legal Assistance</div>
+
+        <h1 id="welcomeText">
+            Welcome to <span>LexVoice</span>
+        </h1>
+
+        <p>
+            Your personal multilingual legal assistance platform.
+            Access legal information, manage complaints, connect with
+            lawyers and keep your important documents in one place.
+        </p>
+
+        <div class="welcome-line"></div>
+    </section>
+
+    <p id="pageMessage"></p>
+
+    <section>
+        <div class="section-heading">
+            <div>
+                <h2>Your Services</h2>
+                <p>Choose a service to continue.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <a href="/index.html" class="card">
+                <div class="icon-box">⌂</div>
+                <span class="card-arrow">↗</span>
+                <h3>Home</h3>
+                <p>Explore the LexVoice legal assistance platform.</p>
+            </a>
+
+            <a href="/laws.html" class="card">
+                <div class="icon-box">⚖</div>
+                <span class="card-arrow">↗</span>
+                <h3>Search Laws</h3>
+                <p>Explore legal information, laws and your rights.</p>
+            </a>
+
+            <a href="/lawyers.html" class="card">
+                <div class="icon-box">♙</div>
+                <span class="card-arrow">↗</span>
+                <h3>Find a Lawyer</h3>
+                <p>Find lawyer information and available contact details.</p>
+            </a>
+
+            <a href="/complaint.html" class="card">
+                <div class="icon-box">✎</div>
+                <span class="card-arrow">↗</span>
+                <h3>File a Complaint</h3>
+                <p>Submit a new legal complaint through LexVoice.</p>
+            </a>
+
+            <a href="/my-complaints.html" class="card">
+                <div class="icon-box">▤</div>
+                <span class="card-arrow">↗</span>
+                <h3>My Complaints</h3>
+                <p>View submitted complaints and track their progress.</p>
+            </a>
+
+            <a href="/my-files.html" class="card">
+                <div class="icon-box">▣</div>
+                <span class="card-arrow">↗</span>
+                <h3>My Files</h3>
+                <p>Upload, view, download and manage legal documents.</p>
+            </a>
+
+            <a href="/profile.html" class="card">
+                <div class="icon-box">♙</div>
+                <span class="card-arrow">↗</span>
+                <h3>My Profile</h3>
+                <p>View and manage your personal account information.</p>
+            </a>
+
+            <a href="/about.html" class="card">
+                <div class="icon-box">ⓘ</div>
+                <span class="card-arrow">↗</span>
+                <h3>About LexVoice</h3>
+                <p>Learn about our platform and its legal assistance services.</p>
+            </a>
+
+<a href="/notifications.html" class="card">
+    <div class="icon-box">🔔</div>
+    <span class="card-arrow">↗</span>
+    <h3>Notifications</h3>
+    <p>View important updates, complaint solutions and announcements.</p>
+</a>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 <span>LexVoice</span> | Multilingual Legal Assistant
+</footer>
+
+<script>
+async function loadUser() {
+    const message = document.getElementById("pageMessage");
+
+    try {
+        const response = await fetch("/api/me", {
+            credentials: "same-origin",
+            cache: "no-store"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.logged_in) {
+            window.location.href = "/login";
+            return;
+        }
+
+        const name = data.user && data.user.name
+            ? data.user.name
+            : "User";
+
+        document.getElementById("welcomeText").innerHTML =
+            "Welcome, <span></span>";
+
+        document.querySelector("#welcomeText span").textContent = name;
+
+    } catch (error) {
+        message.textContent =
+            "Unable to connect to LexVoice server. Please refresh the page.";
+    }
+}
+
+async function logout() {
+    try {
+        const response = await fetch("/logout", {
+            method: "POST",
+            credentials: "same-origin"
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            window.location.href = "/login";
+        } else {
+            alert(data.message || "Unable to log out.");
+        }
+
+    } catch (error) {
+        alert("Unable to connect to the server.");
+    }
+}
+
+loadUser();
+</script>
+
+</body>
+</html>

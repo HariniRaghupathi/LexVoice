@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Registration</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #071A1F;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #E8F1F2;
+    padding: 35px 15px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Golden legal scales decoration */
+.scales {
+    position: fixed;
+    width: 190px;
+    height: 190px;
+    color: #D7B56D;
+    opacity: 0.32;
+    pointer-events: none;
+}
+
+.scales.left {
+    top: 25px;
+    left: 20px;
+}
+
+.scales.right {
+    bottom: 20px;
+    right: 20px;
+    transform: rotate(180deg);
+}
+
+.register-box {
+    position: relative;
+    z-index: 1;
+    width: 430px;
+    max-width: 100%;
+    background: rgba(16, 47, 53, 0.97);
+    padding: 40px;
+    border-radius: 18px;
+    border: 1px solid #D7B56D;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+    text-align: center;
+    font-size: 30px;
+    color: #D7B56D;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-icon {
+    font-size: 34px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #B7CBCD;
+    margin-bottom: 27px;
+    font-size: 16px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    background: #071A1F;
+    border: 1px solid #35585E;
+    border-radius: 7px;
+    color: #E8F1F2;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: #D7B56D;
+    box-shadow: 0 0 0 2px rgba(215, 181, 109, 0.15);
+}
+
+input::placeholder {
+    color: #9DB4B8;
+}
+
+select option {
+    background: #071A1F;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #D7B56D;
+    color: #071A1F;
+    border: 0;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 5px;
+    transition: 0.2s;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background: #E6C983;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(215, 181, 109, 0.2);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.login {
+    text-align: center;
+    margin-top: 22px;
+    color: #9DB4B8;
+    font-size: 14px;
+}
+
+.login a {
+    color: #D7B56D;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login a:hover {
+    text-decoration: underline;
+}
+
+.password-info {
+    font-size: 12px;
+    color: #9DB4B8;
+    margin-top: -8px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.error-message,
+.success-message {
+    display: none;
+    padding: 11px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.error-message {
+    background: rgba(239, 83, 80, 0.12);
+    border: 1px solid #ef5350;
+    color: #ff8a87;
+}
+
+.success-message {
+    background: rgba(50, 183, 121, 0.12);
+    border: 1px solid #32b779;
+    color: #69d39d;
+}
+
+@media (max-width: 500px) {
+    .register-box {
+        padding: 30px 22px;
+    }
+
+    .scales {
+        width: 110px;
+        height: 110px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Decorative golden scales -->
+<svg class="scales left" viewBox="0 0 200 200"
+     fill="none" stroke="currentColor"
+     stroke-width="2.5" stroke-linecap="round">
+    <path d="M100 25 V165 M65 165 H135 M80 175 H120"/>
+    <path d="M55 55 H145 M100 35 L55 55 M100 35 L145 55"/>
+    <path d="M55 55 L35 105 M55 55 L75 105"/>
+    <path d="M145 55 L125 105 M145 55 L165 105"/>
+    <path d="M25 105 Q55 135 85 105"/>
+    <path d="M115 105 Q145 135 175 105"/>
+    <path d="M85 105 H25 M175 105 H115"/>
+    <circle cx="100" cy="25" r="5"/>
+</svg>
+
+<svg class="scales right" viewBox="0 0 200 200"
+     fill="none" stroke="currentColor"
+     stroke-width="2.5" stroke-linecap="round">
+    <path d="M100 25 V165 M65 165 H135 M80 175 H120"/>
+    <path d="M55 55 H145 M100 35 L55 55 M100 35 L145 55"/>
+    <path d="M55 55 L35 105 M55 55 L75 105"/>
+    <path d="M145 55 L125 105 M145 55 L165 105"/>
+    <path d="M25 105 Q55 135 85 105"/>
+    <path d="M115 105 Q145 135 175 105"/>
+    <path d="M85 105 H25 M175 105 H115"/>
+    <circle cx="100" cy="25" r="5"/>
+</svg>
+
+<div class="register-box">
+
+    <div class="logo">
+        <span class="logo-icon">⚖</span>
+        LexVoice
+    </div>
+
+    <p class="subtitle">Create Your Account</p>
+
+    <div id="errorMessage" class="error-message"></div>
+    <div id="successMessage" class="success-message"></div>
+
+    <form id="registrationForm">
+
+        <input
+            id="name"
+            type="text"
+            placeholder="Full Name"
+            autocomplete="name"
+            required
+        >
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Email Address"
+            autocomplete="email"
+            required
+        >
+
+        <input
+            id="phone"
+            type="tel"
+            placeholder="Phone Number (+91 9876543210)"
+            autocomplete="tel"
+            required
+        >
+
+        <select id="language" required>
+            <option value="English">English</option>
+            <option value="Kannada">Kannada</option>
+        </select>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Create Password"
+            autocomplete="new-password"
+            required
+        >
+
+        <div class="password-info">
+            Password must contain at least 6 characters and 1 special character.
+        </div>
+
+        <input
+            id="confirm"
+            type="password"
+            placeholder="Confirm Password"
+            autocomplete="new-password"
+            required
+        >
+
+        <button type="submit" id="registerButton">
+            CREATE ACCOUNT
+        </button>
+
+    </form>
+
+    <div class="login">
+        Already registered?
+        <a href="/login">Login</a>
+    </div>
+
+</div>
+
+<script>
+const form = document.getElementById("registrationForm");
+const errorMessage = document.getElementById("errorMessage");
+const successMessage = document.getElementById("successMessage");
+const registerButton = document.getElementById("registerButton");
+
+function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = "block";
+    successMessage.style.display = "none";
+}
+
+function showSuccess(message) {
+    successMessage.textContent = message;
+    successMessage.style.display = "block";
+    errorMessage.style.display = "none";
+}
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const language = document.getElementById("language").value;
+    const password = document.getElementById("password").value;
+    const confirm = document.getElementById("confirm").value;
+
+    errorMessage.style.display = "none";
+    successMessage.style.display = "none";
+
+    if (name.length < 2) {
+        showError("Please enter your full name.");
+        return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        showError("Please enter a valid email address.");
+        return;
+    }
+
+    let cleanPhone = phone.replace(/\D/g, "");
+
+    if (cleanPhone.length === 12 && cleanPhone.startsWith("91")) {
+        cleanPhone = cleanPhone.substring(2);
+    }
+
+    const phonePattern = /^[6-9][0-9]{9}$/;
+
+    if (!phonePattern.test(cleanPhone)) {
+        showError("Please enter a valid Indian mobile number.");
+        return;
+    }
+
+    if (password.length < 6) {
+        showError("Password must contain at least 6 characters.");
+        return;
+    }
+
+    const specialCharacterPattern = /[^A-Za-z0-9]/;
+
+    if (!specialCharacterPattern.test(password)) {
+        showError("Password must contain at least one special character.");
+        return;
+    }
+
+    if (password !== confirm) {
+        showError("Passwords do not match.");
+        return;
+    }
+
+    registerButton.disabled = true;
+    registerButton.textContent = "CREATING ACCOUNT...";
+
+    try {
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                phone: cleanPhone,
+                language: language,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            showError(data.message || "Registration failed.");
+            return;
+        }
+
+        showSuccess(data.message || "Registration successful!");
+
+        form.reset();
+
+        setTimeout(function() {
+            window.location.href = "/login";
+        }, 1500);
+
+    } catch (error) {
+        console.error("Registration error:", error);
+
+        showError(
+            "Unable to connect to the server. Please make sure Flask is running."
+        );
+
+    } finally {
+        registerButton.disabled = false;
+        registerButton.textContent = "CREATE ACCOUNT";
+    }
+});
+</script>
+
+</body>
+</html>

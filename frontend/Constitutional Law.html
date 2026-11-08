@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LexVoice | Constitutional Law</title>
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#071A1F;
+    color:#E8F1F2;
+    line-height:1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    height:78px;
+    background:#0B252A;
+    border-bottom:1px solid #29494F;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:#D7B56D;
+    font-size:25px;
+    font-weight:700;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+
+    border:2px solid #D7B56D;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#C7D8DA;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#D7B56D;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    padding:80px 8%;
+
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            #173C42 0%,
+            transparent 35%
+        ),
+        #071A1F;
+
+    border-bottom:1px solid #203E43;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.badge{
+    display:inline-block;
+
+    padding:7px 15px;
+
+    border:1px solid #665936;
+    border-radius:30px;
+
+    color:#D7B56D;
+
+    font-size:13px;
+    letter-spacing:1px;
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:52px;
+    line-height:1.1;
+
+    margin-bottom:18px;
+}
+
+.hero h1 span{
+    color:#D7B56D;
+}
+
+.hero p{
+    max-width:760px;
+
+    color:#AFC3C6;
+
+    font-size:17px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-section{
+    padding:35px 8%;
+    background:#0B252A;
+}
+
+.search-box{
+    max-width:850px;
+    margin:auto;
+
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+
+    padding:16px 20px;
+
+    background:#071A1F;
+
+    border:1px solid #3A5B60;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#D7B56D;
+}
+
+.search-icon{
+    position:absolute;
+
+    right:18px;
+    top:13px;
+
+    font-size:20px;
+
+    color:#D7B56D;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.container{
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:65px 25px;
+}
+
+.section-title{
+    color:#D7B56D;
+
+    font-size:32px;
+
+    margin-bottom:12px;
+}
+
+.section-description{
+    color:#9DB4B8;
+
+    margin-bottom:30px;
+}
+
+/* =========================
+   OVERVIEW
+========================= */
+
+.overview{
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:15px;
+
+    padding:30px;
+
+    margin-bottom:55px;
+}
+
+.overview p{
+    color:#B7C9CB;
+}
+
+.highlight{
+    color:#D7B56D;
+    font-weight:600;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:22px;
+
+    margin-bottom:60px;
+}
+
+.card{
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:14px;
+
+    padding:28px;
+
+    transition:.3s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:4px;
+    height:100%;
+
+    background:#D7B56D;
+
+    transform:scaleY(0);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+
+    border-color:#D7B56D;
+}
+
+.card:hover::before{
+    transform:scaleY(1);
+}
+
+.card-icon{
+    font-size:30px;
+
+    margin-bottom:15px;
+}
+
+.card h3{
+    color:#E8F1F2;
+
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#9DB4B8;
+
+    font-size:14px;
+}
+
+/* =========================
+   ARTICLE TABLE
+========================= */
+
+.table-container{
+    overflow-x:auto;
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:14px;
+
+    margin-bottom:60px;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+th{
+    background:#0B252A;
+
+    color:#D7B56D;
+
+    text-align:left;
+
+    padding:16px;
+}
+
+td{
+    padding:15px;
+
+    color:#B7C9CB;
+
+    border-top:1px solid #29494F;
+}
+
+tr:hover td{
+    background:#12343A;
+}
+
+.article{
+    color:#D7B56D;
+    font-weight:600;
+}
+
+/* =========================
+   RIGHTS SECTION
+========================= */
+
+.right-card{
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+}
+
+.right-card h3{
+    color:#D7B56D;
+
+    margin-bottom:7px;
+}
+
+.right-card p{
+    color:#AFC3C6;
+
+    font-size:14px;
+}
+
+/* =========================
+   AMENDMENTS
+========================= */
+
+.amendments{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+}
+
+.amendment{
+    padding:25px;
+
+    background:#102F35;
+
+    border:1px solid #2C5157;
+
+    border-radius:12px;
+}
+
+.amendment span{
+    display:inline-block;
+
+    color:#071A1F;
+
+    background:#D7B56D;
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+.amendment h3{
+    margin-bottom:8px;
+}
+
+.amendment p{
+    color:#9DB4B8;
+
+    font-size:14px;
+}
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+    margin-top:50px;
+
+    padding:25px;
+
+    border-left:4px solid #D7B56D;
+
+    background:#102F35;
+
+    color:#AFC3C6;
+}
+
+.notice strong{
+    color:#D7B56D;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#06161A;
+
+    border-top:1px solid #203E43;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#81979B;
+}
+
+.footer-logo{
+    color:#D7B56D;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
+    }
+
+    .card-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .card-grid,
+    .amendments{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:60px 6%;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .container{
+        padding:45px 18px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ⚖
+        </div>
+
+        LexVoice
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="laws.html">
+            Laws
+        </a>
+
+        <a href="lawyers.html">
+            Lawyers
+        </a>
+
+        <a href="complaint.html">
+            Complaint
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            INDIAN LEGAL INFORMATION
+        </div>
+
+        <h1>
+            Constitutional
+            <span>Law</span>
+        </h1>
+
+        <p>
+            Explore the Constitution of India through an organized
+            collection of constitutional principles, Fundamental
+            Rights, Directive Principles, Fundamental Duties and
+            important Articles.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<section class="search-section">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search constitutional topics, Articles or rights..."
+            onkeyup="searchContent()"
+        >
+
+        <span class="search-icon">
+            ⌕
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+<!-- OVERVIEW -->
+
+<section>
+
+    <h2 class="section-title">
+        Constitution of India
+    </h2>
+
+    <p class="section-description">
+        An overview of India's constitutional framework.
+    </p>
+
+
+    <div class="overview">
+
+        <p>
+
+            The
+            <span class="highlight">
+                Constitution of India
+            </span>
+            is the foundational legal document that establishes
+            the framework of government, defines powers and
+            responsibilities of institutions, and sets out
+            constitutional rights and principles.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            It provides the framework through which the Union and
+            State governments function and establishes principles
+            concerning democracy, justice, liberty and equality.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- MAJOR AREAS -->
+
+<section>
+
+    <h2 class="section-title">
+        Major Constitutional Areas
+    </h2>
+
+    <p class="section-description">
+        Explore important areas of constitutional law.
+    </p>
+
+
+    <div class="card-grid" id="contentGrid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏛️
+            </div>
+
+            <h3>
+                Fundamental Rights
+            </h3>
+
+            <p>
+                Constitutional rights protecting important
+                freedoms and equality of individuals.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📜
+            </div>
+
+            <h3>
+                Directive Principles
+            </h3>
+
+            <p>
+                Constitutional principles that guide the State
+                in governance and public policy.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚖️
+            </div>
+
+            <h3>
+                Fundamental Duties
+            </h3>
+
+            <p>
+                Constitutional duties expected of citizens
+                under Article 51A.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏛
+            </div>
+
+            <h3>
+                Union Government
+            </h3>
+
+            <p>
+                Constitutional provisions relating to the
+                President, Parliament and Union executive.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏢
+            </div>
+
+            <h3>
+                State Government
+            </h3>
+
+            <p>
+                Constitutional framework concerning Governors,
+                State legislatures and State executives.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚙️
+            </div>
+
+            <h3>
+                Constitutional Amendments
+            </h3>
+
+            <p>
+                Learn how constitutional provisions may be
+                amended through the constitutional process.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- IMPORTANT ARTICLES -->
+
+<section>
+
+    <h2 class="section-title">
+        Important Articles
+    </h2>
+
+    <p class="section-description">
+        Selected constitutional Articles for quick reference.
+    </p>
+
+
+    <div class="table-container">
+
+        <table id="articleTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Article
+                    </th>
+
+                    <th>
+                        Subject
+                    </th>
+
+                    <th>
+                        Category
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 14
+                    </td>
+
+                    <td>
+                        Equality before law
+                    </td>
+
+                    <td>
+                        Fundamental Rights
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 19
+                    </td>
+
+                    <td>
+                        Protection of certain freedoms
+                    </td>
+
+                    <td>
+                        Fundamental Rights
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 21
+                    </td>
+
+                    <td>
+                        Protection of life and personal liberty
+                    </td>
+
+                    <td>
+                        Fundamental Rights
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 32
+                    </td>
+
+                    <td>
+                        Constitutional remedies
+                    </td>
+
+                    <td>
+                        Fundamental Rights
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 44
+                    </td>
+
+                    <td>
+                        Uniform civil code for citizens
+                    </td>
+
+                    <td>
+                        Directive Principles
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 51A
+                    </td>
+
+                    <td>
+                        Fundamental duties
+                    </td>
+
+                    <td>
+                        Fundamental Duties
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td class="article">
+                        Article 368
+                    </td>
+
+                    <td>
+                        Power and procedure to amend the Constitution
+                    </td>
+
+                    <td>
+                        Constitutional Amendment
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+<!-- FUNDAMENTAL RIGHTS -->
+
+<section>
+
+    <h2 class="section-title">
+        Fundamental Rights
+    </h2>
+
+    <p class="section-description">
+        Major categories of Fundamental Rights under Part III.
+    </p>
+
+
+    <div class="right-card">
+
+        <h3>
+            Right to Equality
+        </h3>
+
+        <p>
+            Includes constitutional guarantees relating to
+            equality before law and equal protection of laws.
+        </p>
+
+    </div>
+
+
+    <div class="right-card">
+
+        <h3>
+            Right to Freedom
+        </h3>
+
+        <p>
+            Includes specified freedoms protected by the
+            Constitution, subject to constitutional limitations.
+        </p>
+
+    </div>
+
+
+    <div class="right-card">
+
+        <h3>
+            Right against Exploitation
+        </h3>
+
+        <p>
+            Provides constitutional protections concerning
+            exploitation such as trafficking and forced labour.
+        </p>
+
+    </div>
+
+
+    <div class="right-card">
+
+        <h3>
+            Right to Freedom of Religion
+        </h3>
+
+        <p>
+            Provides constitutional protections concerning
+            freedom of conscience and religion.
+        </p>
+
+    </div>
+
+
+    <div class="right-card">
+
+        <h3>
+            Cultural and Educational Rights
+        </h3>
+
+        <p>
+            Contains protections concerning cultural and
+            educational interests.
+        </p>
+
+    </div>
+
+
+    <div class="right-card">
+
+        <h3>
+            Right to Constitutional Remedies
+        </h3>
+
+        <p>
+            Provides a constitutional mechanism for seeking
+            enforcement of Fundamental Rights.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- DIRECTIVE PRINCIPLES -->
+
+<section style="margin-top:60px;">
+
+    <h2 class="section-title">
+        Directive Principles of State Policy
+    </h2>
+
+    <p class="section-description">
+        Constitutional principles contained in Part IV.
+    </p>
+
+
+    <div class="card-grid">
+
+        <div class="card">
+
+            <h3>
+                Social Justice
+            </h3>
+
+            <p>
+                Principles concerning social and economic
+                welfare and justice.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Economic Welfare
+            </h3>
+
+            <p>
+                Principles concerning distribution of resources
+                and economic policy.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Public Health
+            </h3>
+
+            <p>
+                Constitutional guidance concerning public
+                health and related welfare objectives.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- FUNDAMENTAL DUTIES -->
+
+<section>
+
+    <h2 class="section-title">
+        Fundamental Duties
+    </h2>
+
+    <p class="section-description">
+        Fundamental Duties are set out in Article 51A.
+    </p>
+
+
+    <div class="overview">
+
+        <p>
+            Fundamental Duties describe constitutional duties
+            expected of citizens. They include respecting the
+            Constitution, national symbols and promoting harmony,
+            among other duties specified in Article 51A.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- AMENDMENTS -->
+
+<section>
+
+    <h2 class="section-title">
+        Selected Constitutional Amendments
+    </h2>
+
+    <p class="section-description">
+        Examples of significant amendments for reference.
+    </p>
+
+
+    <div class="amendments">
+
+
+        <div class="amendment">
+
+            <span>
+                42nd Amendment
+            </span>
+
+            <h3>
+                1976
+            </h3>
+
+            <p>
+                A major constitutional amendment that made
+                several changes to the Constitution.
+            </p>
+
+        </div>
+
+
+        <div class="amendment">
+
+            <span>
+                44th Amendment
+            </span>
+
+            <h3>
+                1978
+            </h3>
+
+            <p>
+                Made several changes concerning constitutional
+                rights and emergency-related provisions.
+            </p>
+
+        </div>
+
+
+        <div class="amendment">
+
+            <span>
+                73rd Amendment
+            </span>
+
+            <h3>
+                1992
+            </h3>
+
+            <p>
+                Established constitutional provisions relating
+                to Panchayats.
+            </p>
+
+        </div>
+
+
+        <div class="amendment">
+
+            <span>
+                74th Amendment
+            </span>
+
+            <h3>
+                1992
+            </h3>
+
+            <p>
+                Established constitutional provisions relating
+                to Municipalities.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- LEGAL NOTICE -->
+
+<div class="notice">
+
+    <strong>Legal Information Notice:</strong>
+
+    This page is intended for educational and informational
+    purposes. Constitutional provisions, amendments and
+    judicial interpretations may change or require context.
+    For advice concerning a specific legal matter, consult
+    a qualified legal professional.
+
+</div>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        ⚖ LexVoice
+    </div>
+
+    <p>
+        Multilingual Legal Information Platform
+    </p>
+
+    <p>
+        © 2026 LexVoice. All rights reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   SEARCH FUNCTION
+========================= */
+
+function searchContent(){
+
+    let input =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    let cards =
+        document
+        .querySelectorAll(".card");
+
+
+    let rows =
+        document
+        .querySelectorAll("#articleTable tbody tr");
+
+
+    /* Search Cards */
+
+    cards.forEach(function(card){
+
+        let text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(input)){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    /* Search Articles */
+
+    rows.forEach(function(row){
+
+        let text =
+            row.innerText.toLowerCase();
+
+        if(text.includes(input)){
+
+            row.style.display = "";
+
+        }else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   PAGE LOAD
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        console.log(
+            "LexVoice Constitutional Law page loaded."
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

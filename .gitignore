@@ -1,0 +1,25 @@
+
+# Python virtual environment
+backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database
+backend/lexvoice.db
+
+# Uploaded documents
+backend/uploads/
+
+# Secret files
+.env
+backend/.env
+
+# IDE settings
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp

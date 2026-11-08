@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications | LexVoice</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #071A1F;
+    color: #E8F1F2;
+    min-height: 100vh;
+}
+
+header {
+    background: #102F35;
+    padding: 20px 7%;
+    border-bottom: 1px solid #35585E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #D7B56D;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.back-btn {
+    color: #D7B56D;
+    text-decoration: none;
+    border: 1px solid #D7B56D;
+    padding: 9px 17px;
+    border-radius: 8px;
+}
+
+.container {
+    width: 90%;
+    max-width: 950px;
+    margin: 40px auto;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: #D7B56D;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #B7CBCD;
+}
+
+.count {
+    background: #D7B56D;
+    color: #071A1F;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+.refresh {
+    background: #D7B56D;
+    color: #071A1F;
+}
+
+.notification {
+    background: #102F35;
+    border: 1px solid #24494F;
+    border-radius: 13px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.notification.unread {
+    border-left: 4px solid #D7B56D;
+}
+
+.notification h3 {
+    color: #D7B56D;
+    margin-bottom: 9px;
+}
+
+.notification p {
+    color: #E8F1F2;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.meta {
+    color: #9DB4B8;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.notification-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.read-btn {
+    background: #D7B56D;
+    color: #071A1F;
+}
+
+.delete-btn {
+    background: #7C3434;
+    color: white;
+}
+
+.empty {
+    background: #102F35;
+    border: 1px solid #24494F;
+    padding: 45px 20px;
+    border-radius: 13px;
+    text-align: center;
+    color: #B7CBCD;
+}
+
+.empty span {
+    display: block;
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.message {
+    margin-bottom: 15px;
+    color: #D7B56D;
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 17px 5%;
+    }
+
+    .container {
+        width: 92%;
+        margin-top: 28px;
+    }
+
+    .notification {
+        flex-direction: column;
+    }
+
+    .notification-buttons {
+        flex-direction: row;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">LexVoice</div>
+    <a href="dashboard.html" class="back-btn">← Back</a>
+</header>
+
+<main class="container">
+
+    <div class="heading">
+        <div>
+            <h1>🔔 Notifications</h1>
+            <p class="subtitle">Stay updated with your LexVoice activities.</p>
+        </div>
+
+        <div class="count">
+            Unread: <span id="unreadCount">0</span>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="refresh" onclick="loadNotifications()">
+            ↻ Refresh
+        </button>
+    </div>
+
+    <div id="message" class="message"></div>
+    <div id="notificationList"></div>
+
+</main>
+
+<script>
+const notificationList = document.getElementById("notificationList");
+const unreadCount = document.getElementById("unreadCount");
+const messageBox = document.getElementById("message");
+
+async function loadNotifications() {
+    notificationList.innerHTML = "<div class='empty'>Loading notifications...</div>";
+    messageBox.textContent = "";
+
+    try {
+        const response = await fetch("/api/notifications");
+        const data = await response.json();
+
+        if (response.status === 401) {
+            notificationList.innerHTML =
+                "<div class='empty'>Please log in to view your notifications.</div>";
+            return;
+        }
+
+        if (!data.success) {
+            throw new Error(data.message || "Unable to load notifications.");
+        }
+
+        unreadCount.textContent = data.unread_count;
+
+        if (!data.notifications.length) {
+            notificationList.innerHTML = `
+                <div class="empty">
+                    <span>🔔</span>
+                    <h3>No notifications yet</h3>
+                    <p>New updates will appear here.</p>
+                </div>
+            `;
+            return;
+        }
+
+        notificationList.innerHTML = "";
+
+        data.notifications.forEach(notification => {
+            const card = document.createElement("div");
+            card.className = "notification" +
+                (notification.is_read ? "" : " unread");
+
+            const content = document.createElement("div");
+
+            const title = document.createElement("h3");
+            title.textContent = notification.title;
+
+            const description = document.createElement("p");
+            description.textContent = notification.message;
+
+            const meta = document.createElement("div");
+            meta.className = "meta";
+            meta.textContent =
+                (notification.notification_type || "general") +
+                " • " + (notification.created_at || "");
+
+            content.append(title, description, meta);
+
+            const buttons = document.createElement("div");
+            buttons.className = "notification-buttons";
+
+            if (!notification.is_read) {
+                const readButton = document.createElement("button");
+                readButton.className = "read-btn";
+                readButton.textContent = "Mark read";
+                readButton.onclick = () => markAsRead(notification.id);
+                buttons.appendChild(readButton);
+            }
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = () => deleteNotification(notification.id);
+            buttons.appendChild(deleteButton);
+
+            card.append(content, buttons);
+            notificationList.appendChild(card);
+        });
+
+    } catch (error) {
+        notificationList.innerHTML =
+            "<div class='empty'>Unable to load notifications. Please try again.</div>";
+        messageBox.textContent = error.message;
+    }
+}
+
+async function markAsRead(id) {
+    try {
+        const response = await fetch(`/api/notifications/${id}/read`, {
+            method: "POST"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Could not update notification.");
+        }
+
+        loadNotifications();
+
+    } catch (error) {
+        messageBox.textContent = error.message;
+    }
+}
+
+async function deleteNotification(id) {
+    if (!confirm("Are you sure you want to delete this notification?")) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/notifications/${id}`, {
+            method: "DELETE"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Could not delete notification.");
+        }
+
+        loadNotifications();
+
+    } catch (error) {
+        messageBox.textContent = error.message;
+    }
+}
+
+loadNotifications();
+</script>
+
+</body>
+</html>

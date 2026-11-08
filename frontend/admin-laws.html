@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexVoice | Admin Law Management</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #071A1F;
+    color: #E8F1F2;
+}
+
+.sidebar {
+    position: fixed;
+    width: 240px;
+    height: 100vh;
+    background: #0B252A;
+    border-right: 1px solid #29494F;
+    padding: 30px 20px;
+}
+
+.logo {
+    color: #D7B56D;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 14px;
+    margin-bottom: 8px;
+    color: #B7CBCD;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.sidebar a:hover {
+    background: #102F35;
+    color: #D7B56D;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 40px;
+}
+
+h1, h2 {
+    color: #D7B56D;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: #9DB4B8;
+    margin-bottom: 25px;
+}
+
+.panel {
+    background: #102F35;
+    border: 1px solid #31555B;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #D7B56D;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    background: #071A1F;
+    border: 1px solid #35585E;
+    border-radius: 7px;
+    color: white;
+    outline: none;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #D7B56D;
+}
+
+button {
+    padding: 11px 18px;
+    border: 1px solid #D7B56D;
+    background: #D7B56D;
+    color: #071A1F;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.cancel-btn {
+    background: transparent;
+    color: #D7B56D;
+}
+
+.delete-btn {
+    background: transparent;
+    color: #F19B9B;
+    border-color: #F19B9B;
+}
+
+.edit-btn {
+    background: transparent;
+    color: #D7B56D;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th, td {
+    padding: 13px;
+    text-align: left;
+    border-bottom: 1px solid #29494F;
+    vertical-align: top;
+}
+
+th {
+    color: #D7B56D;
+}
+
+td {
+    color: #B7CBCD;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.message {
+    margin-top: 15px;
+    color: #9DB4B8;
+}
+
+.logout {
+    margin-top: 25px;
+    color: #E8A0A0 !important;
+}
+
+@media(max-width: 850px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="logo">⚖ LexVoice</div>
+
+    <a href="/admin.html">📊 Dashboard</a>
+    <a href="/admin-laws.html">📚 Manage Laws</a>
+    <a href="/lawyers.html">👨‍⚖️ Lawyers</a>
+    <a href="/admin-junior-lawyers.html">⚖ Manage Junior Lawyers</a>
+    <a href="/complaint.html">📂 Complaints</a>
+    <a href="/admin-logout" class="logout">🚪 Admin Logout</a>
+</aside>
+
+<main class="main">
+
+    <h1>Manage Laws</h1>
+    <p class="subtitle">
+        Add, update and manage legal information on LexVoice.
+    </p>
+
+    <section class="panel">
+
+        <h2 id="formTitle">Add New Law</h2>
+
+        <form id="lawForm">
+
+            <div class="form-group">
+                <label for="title">Law Title</label>
+                <input type="text" id="title"
+                       placeholder="Enter law title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Constitutional Law">Constitutional Law</option>
+                    <option value="Criminal Law">Criminal Law</option>
+                    <option value="Civil Law">Civil Law</option>
+                    <option value="Family Law">Family Law</option>
+                    <option value="Consumer Law">Consumer Law</option>
+                    <option value="Cyber Law">Cyber Law</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Law Description</label>
+                <textarea id="description"
+                          placeholder="Enter law description"
+                          required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="rights">Rights and Legal Information</label>
+                <textarea id="rights"
+                          placeholder="Enter citizens' rights and legal information"
+                          required></textarea>
+            </div>
+
+            <button type="submit" id="submitButton">
+                Add Law
+            </button>
+
+            <button type="button" class="cancel-btn"
+                    id="cancelButton" hidden>
+                Cancel Edit
+            </button>
+
+        </form>
+
+        <p class="message" id="formMessage"></p>
+
+    </section>
+
+    <section class="panel">
+
+        <h2>Existing Laws</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="lawTable">
+                    <tr>
+                        <td colspan="5">Loading laws...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="message" id="listMessage"></p>
+
+    </section>
+
+</main>
+
+<script>
+
+let editingLawId = null;
+
+const lawForm = document.getElementById("lawForm");
+const lawTable = document.getElementById("lawTable");
+const formMessage = document.getElementById("formMessage");
+const listMessage = document.getElementById("listMessage");
+
+async function apiRequest(url, options = {}) {
+
+    const response = await fetch(url, {
+        ...options,
+        credentials: "same-origin"
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+        if (response.status === 401) {
+            window.location.href = "/admin-login.html";
+            throw new Error("Admin login required.");
+        }
+
+        throw new Error(data.message || "Request failed.");
+    }
+
+    return data;
+}
+
+
+async function loadLaws() {
+
+    lawTable.innerHTML =
+        '<tr><td colspan="5">Loading laws...</td></tr>';
+
+    try {
+
+        const data = await apiRequest("/api/admin/laws");
+
+        const laws = Array.isArray(data.laws) ? data.laws : [];
+
+        lawTable.replaceChildren();
+
+        if (laws.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 5;
+            cell.textContent = "No laws added yet.";
+
+            row.appendChild(cell);
+            lawTable.appendChild(row);
+            return;
+        }
+
+        laws.forEach(function(law) {
+
+            const row = document.createElement("tr");
+
+            const values = [
+                law.id,
+                law.title,
+                law.category,
+                law.description
+            ];
+
+            values.forEach(function(value) {
+
+                const cell = document.createElement("td");
+                cell.textContent = value || "-";
+                row.appendChild(cell);
+
+            });
+
+            const actionCell = document.createElement("td");
+
+            const editButton = document.createElement("button");
+            editButton.className = "edit-btn";
+            editButton.textContent = "Edit";
+
+            editButton.addEventListener("click", function() {
+                editLaw(law);
+            });
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "delete-btn";
+            deleteButton.textContent = "Delete";
+
+            deleteButton.addEventListener("click", function() {
+                deleteLaw(law.id);
+            });
+
+            actionCell.appendChild(editButton);
+            actionCell.appendChild(deleteButton);
+
+            row.appendChild(actionCell);
+            lawTable.appendChild(row);
+
+        });
+
+    } catch (error) {
+
+        lawTable.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+
+        cell.colSpan = 5;
+        cell.textContent = error.message;
+
+        row.appendChild(cell);
+        lawTable.appendChild(row);
+
+        listMessage.textContent = error.message;
+    }
+}
+
+
+function editLaw(law) {
+
+    editingLawId = law.id;
+
+    document.getElementById("title").value = law.title || "";
+    document.getElementById("category").value = law.category || "";
+    document.getElementById("description").value = law.description || "";
+    document.getElementById("rights").value = law.rights || "";
+
+    document.getElementById("formTitle").textContent = "Edit Law";
+    document.getElementById("submitButton").textContent = "Update Law";
+    document.getElementById("cancelButton").hidden = false;
+
+    formMessage.textContent = "";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function resetForm() {
+
+    editingLawId = null;
+
+    lawForm.reset();
+
+    document.getElementById("formTitle").textContent = "Add New Law";
+    document.getElementById("submitButton").textContent = "Add Law";
+    document.getElementById("cancelButton").hidden = true;
+
+    formMessage.textContent = "";
+}
+
+
+document.getElementById("cancelButton").addEventListener("click", resetForm);
+
+
+lawForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const lawData = {
+
+        title: document.getElementById("title").value.trim(),
+        category: document.getElementById("category").value,
+        description: document.getElementById("description").value.trim(),
+        rights: document.getElementById("rights").value.trim()
+
+    };
+
+    if (!lawData.title || !lawData.category ||
+        !lawData.description || !lawData.rights) {
+
+        formMessage.textContent = "Please complete all fields.";
+        return;
+    }
+
+    const editing = editingLawId !== null;
+
+    const url = editing
+        ? "/api/admin/laws/" + editingLawId
+        : "/api/admin/laws";
+
+    const method = editing ? "PUT" : "POST";
+
+    try {
+
+        const data = await apiRequest(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(lawData)
+        });
+
+        alert(data.message || (editing
+            ? "Law updated successfully!"
+            : "Law added successfully!"));
+
+        resetForm();
+        await loadLaws();
+
+    } catch (error) {
+
+        formMessage.textContent = error.message;
+
+    }
+
+});
+
+
+async function deleteLaw(id) {
+
+    if (!confirm("Are you sure you want to delete this law?")) {
+        return;
+    }
+
+    try {
+
+        const data = await apiRequest(
+            "/api/admin/laws/" + id,
+            { method: "DELETE" }
+        );
+
+        alert(data.message || "Law deleted successfully!");
+
+        if (editingLawId === id) {
+            resetForm();
+        }
+
+        await loadLaws();
+
+    } catch (error) {
+
+        alert(error.message);
+
+    }
+}
+
+
+async function checkAdmin() {
+
+    try {
+
+        await apiRequest("/api/admin/stats");
+        await loadLaws();
+
+    } catch (error) {
+
+        listMessage.textContent = error.message;
+
+    }
+}
+
+checkAdmin();
+
+</script>
+
+</body>
+</html>

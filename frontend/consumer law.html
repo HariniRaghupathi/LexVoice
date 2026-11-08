@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LexVoice - Consumer Law</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+background:#071A1F;
+color:#E8F1F2;
+line-height:1.6;
+}
+
+header{
+background:#102F35;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid #D7B56D;
+}
+
+.logo{
+font-size:27px;
+font-weight:bold;
+color:#D7B56D;
+}
+
+nav a{
+color:#E8F1F2;
+text-decoration:none;
+margin-left:20px;
+}
+
+nav a:hover{color:#D7B56D}
+
+.hero{
+text-align:center;
+padding:70px 20px;
+background:linear-gradient(135deg,#071A1F,#123B42);
+}
+
+.hero h1{
+font-size:48px;
+color:#D7B56D;
+}
+
+.hero p{
+max-width:750px;
+margin:15px auto;
+color:#C8D8DA;
+}
+
+.container{
+width:86%;
+max-width:1100px;
+margin:45px auto;
+}
+
+.search{
+width:100%;
+padding:15px;
+background:#102F35;
+border:1px solid #D7B56D;
+border-radius:8px;
+color:white;
+}
+
+.title{
+color:#D7B56D;
+margin:35px 0 20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:20px;
+}
+
+.card{
+background:#102F35;
+padding:25px;
+border-radius:12px;
+border:1px solid #28545B;
+}
+
+.card:hover{
+border-color:#D7B56D;
+transform:translateY(-4px);
+}
+
+.card h3{
+color:#D7B56D;
+margin-bottom:10px;
+}
+
+.info{
+background:#102F35;
+padding:25px;
+border-left:4px solid #D7B56D;
+border-radius:8px;
+}
+
+ul{margin-left:25px}
+
+footer{
+margin-top:60px;
+padding:25px;
+text-align:center;
+background:#102F35;
+color:#AFC3C6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">⚖ LexVoice</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="laws.html">Laws</a>
+<a href="lawyers.html">Lawyers</a>
+<a href="complaint.html">Complaint</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Consumer Law</h1>
+<p>
+Learn about consumer rights, defective goods, poor services,
+complaints and consumer dispute resolution.
+</p>
+</section>
+
+<div class="container">
+
+<input id="search" class="search"
+placeholder="Search Consumer Law topics..."
+onkeyup="searchTopics()">
+
+<h2 class="title">What is Consumer Law?</h2>
+
+<div class="info">
+<p>
+Consumer law provides legal protections for consumers and mechanisms
+for addressing certain disputes involving goods and services.
+</p>
+</div>
+
+<h2 class="title">Consumer Rights</h2>
+
+<div class="cards" id="topics">
+
+<div class="card">
+<h3>Right to Safety</h3>
+<p>Protection against goods and services that may create unreasonable risks.</p>
+</div>
+
+<div class="card">
+<h3>Right to Information</h3>
+<p>Consumers should receive relevant information about products and services.</p>
+</div>
+
+<div class="card">
+<h3>Right to Choose</h3>
+<p>Consumers may have access to choices among goods and services.</p>
+</div>
+
+<div class="card">
+<h3>Right to be Heard</h3>
+<p>Consumer interests may be represented in appropriate forums.</p>
+</div>
+
+<div class="card">
+<h3>Right to Redressal</h3>
+<p>Legal mechanisms may be available for addressing consumer grievances.</p>
+</div>
+
+<div class="card">
+<h3>Consumer Awareness</h3>
+<p>Consumers can educate themselves about products, services and legal rights.</p>
+</div>
+
+</div>
+
+<h2 class="title">Common Consumer Complaints</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Defective Products</h3>
+<p>Complaints involving defects in purchased goods.</p>
+</div>
+
+<div class="card">
+<h3>Poor Services</h3>
+<p>Disputes involving deficiencies in services.</p>
+</div>
+
+<div class="card">
+<h3>Unfair Practices</h3>
+<p>Complaints concerning certain unfair or misleading business practices.</p>
+</div>
+
+<div class="card">
+<h3>Online Purchases</h3>
+<p>Consumer issues arising from e-commerce transactions.</p>
+</div>
+
+</div>
+
+<h2 class="title">Before Filing a Complaint</h2>
+
+<div class="info">
+<ul>
+<li>Keep invoices and receipts</li>
+<li>Save relevant communications</li>
+<li>Keep photographs or other evidence where appropriate</li>
+<li>Clearly describe the problem</li>
+<li>Check the appropriate consumer dispute forum and procedure</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+© 2026 LexVoice | Educational Legal Information Portal
+</footer>
+
+<script>
+function searchTopics(){
+let value=document.getElementById("search").value.toLowerCase();
+
+document.querySelectorAll("#topics .card").forEach(card=>{
+card.style.display=
+card.innerText.toLowerCase().includes(value)
+?"block":"none";
+});
+}
+</script>
+
+</body>
+</html>
